@@ -95,10 +95,10 @@ export const DiagnosticLabPortal = ({ currentLang = 'en' }) => {
     // 1. Farmer's Initial Submission Photo
     const farmerPhotoUrl = sample.case_image_url || (
       sample.crop?.toLowerCase().includes('cotton')
-        ? 'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=800&q=80'
+        ? 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80'
         : sample.crop?.toLowerCase().includes('soybean')
-        ? 'https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=800&q=80'
-        : 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80'
+        ? 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80'
+        : 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80'
     );
     
     photos.push({
@@ -115,11 +115,11 @@ export const DiagnosticLabPortal = ({ currentLang = 'en' }) => {
       ? sample.field_photos
       : [
           sample.crop?.toLowerCase().includes('cotton') 
-            ? 'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=800&q=80'
-            : 'https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80'
+            ? 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80'
+            : 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
+          'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80'
         ];
 
     const angleMeta = isEn ? [

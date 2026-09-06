@@ -78,7 +78,7 @@ class DataIngestionService:
             count=14,
             etl_threshold=8,
             is_etl_breached=True,
-            photo_url="https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=400&q=80",
+            photo_url="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80",
             date_recorded=now_iso
         )
         self._trap_cache["TRP-NSK-02"] = TrapData(
@@ -89,7 +89,7 @@ class DataIngestionService:
             count=38,
             etl_threshold=30,
             is_etl_breached=True,
-            photo_url="https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=400&q=80",
+            photo_url="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
             date_recorded=now_iso
         )
 

@@ -318,19 +318,19 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
           {
             title: isEn ? "Leaf Macro (Boreholes)" : "पानाचा क्लोज-अप",
             subtitle: isEn ? "Krishi Sevak Ground Truth" : "कृषी सेवक ऑन-साईट फोटो",
-            url: "https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80",
+            url: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
             hasBBox: false
           },
           {
             title: isEn ? "Boll Internal Damage" : "बोंड अंतर्गत नुकसान",
             subtitle: isEn ? "Krishi Sevak Ground Truth" : "कृषी सेवक ऑन-साईट फोटो",
-            url: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80",
+            url: "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
             hasBBox: false
           },
           {
             title: isEn ? "Canopy & Trap Surround" : "झाडाचा विस्तार व सापळा",
             subtitle: isEn ? "Krishi Sevak Ground Truth" : "कृषी सेवक ऑन-साईट फोटो",
-            url: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80",
+            url: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80",
             hasBBox: false
           }
         ]
@@ -1514,7 +1514,7 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
                   farmer_name: "Ramesh Patil (रमेश पाटील)",
                   crop: "Cotton",
                   district: "Yavatmal",
-                  image_url: "https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80",
+                  image_url: "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
                   ai_prediction: "Cotton Pink Bollworm (गुलाबी बोंडअळी)",
                   ai_confidence_pct: 72.0,
                   expert_ground_truth: "American Bollworm (अमेरिकन बोंडअळी)",
@@ -1526,7 +1526,7 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
                   farmer_name: "Suresh Rathod (सुरेश राठोड)",
                   crop: "Soybean",
                   district: "Yavatmal",
-                  image_url: "https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80",
+                  image_url: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
                   ai_prediction: "Soybean Rust (तांबेरा रोग)",
                   ai_confidence_pct: 58.0,
                   expert_ground_truth: "Cercospora Leaf Spot (पानावरील करपा)",

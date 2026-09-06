@@ -116,7 +116,7 @@ def get_cases(user=Depends(get_current_user_context)):
 def create_case(
     farm_id: str = Form("farm_101"),
     crop_hint: Optional[str] = Form(None),
-    image_url: Optional[str] = Form("https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80"),
+    image_url: Optional[str] = Form("https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80"),
     user=Depends(get_current_user_context)
 ):
     return case_manager.create_case(
@@ -317,7 +317,7 @@ def record_lab_test(
     ct_value: Optional[float] = Form(None),
     magnification: Optional[str] = Form("400x Brightfield"),
     test_reference: Optional[str] = Form(None),
-    micrograph_url: Optional[str] = Form("https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80"),
+    micrograph_url: Optional[str] = Form("https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80"),
     user=Depends(get_current_user_context)
 ):
     verify_permission("lab:run_tests", user["role"])

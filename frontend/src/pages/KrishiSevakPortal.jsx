@@ -937,7 +937,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 1. {isEn ? 'Leaf Close-up' : 'पानाचा जवळून फोटो'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoLeaf || 'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=300&q=80'} 
+                      src={fieldPhotoLeaf || 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=400&q=80'} 
                       alt={isEn ? 'Leaf' : 'पान'} 
                       className="w-full h-full object-cover"
                     />
@@ -976,7 +976,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 2. {isEn ? 'Stem Inspection' : 'खोड तपासणी'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoStem || 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=300&q=80'} 
+                      src={fieldPhotoStem || 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=400&q=80'} 
                       alt={isEn ? 'Stem' : 'खोड'} 
                       className="w-full h-full object-cover"
                     />
@@ -1015,7 +1015,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 3. {isEn ? 'Fruit / Boll Damage' : 'फळ / बोंड नुकसान'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoFruit || 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=300&q=80'} 
+                      src={fieldPhotoFruit || 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=400&q=80'} 
                       alt={isEn ? 'Boll' : 'बोंड'} 
                       className="w-full h-full object-cover"
                     />
@@ -1054,7 +1054,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 4. {isEn ? 'Whole Plant Canopy' : 'संपूर्ण झाडाची छत्री'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoWhole || 'https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=300&q=80'} 
+                      src={fieldPhotoWhole || 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=400&q=80'} 
                       alt={isEn ? 'Whole plant' : 'संपूर्ण झाड'} 
                       className="w-full h-full object-cover"
                     />
@@ -1769,7 +1769,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                       </div>
                       <div className="aspect-video bg-slate-900 rounded overflow-hidden relative group">
                         <img 
-                          src={followUpPhotoDay0 || 'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=400&q=80'} 
+                          src={followUpPhotoDay0 || 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=400&q=80'} 
                           alt={isEn ? 'Day 0' : 'दिवस ०'} 
                           className="w-full h-full object-cover"
                         />
@@ -1798,7 +1798,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                       </div>
                       <div className="aspect-video bg-slate-900 rounded overflow-hidden relative group border border-emerald-300">
                         <img 
-                          src={followUpPhotoDay7 || 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80'} 
+                          src={followUpPhotoDay7 || 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=400&q=80'} 
                           alt={isEn ? 'Day 7' : 'दिवस ७'} 
                           className="w-full h-full object-cover"
                         />

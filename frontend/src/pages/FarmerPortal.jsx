@@ -27,7 +27,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
   // Diagnosis State
   const [selectedCrop, setSelectedCrop] = useState('Cotton');
   const [selectedSampleImage, setSelectedSampleImage] = useState(
-    'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80'
+    'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80'
   );
   const [uploadedFile, setUploadedFile] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
@@ -57,7 +57,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       id: 'cotton_pbw',
       title: isEn ? 'Cotton Pink Bollworm' : 'कापूस गुलाबी बोंडअळी',
       crop: 'Cotton',
-      url: 'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80',
+      url: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
       label: isEn ? 'Boll Borehole & Rosetting' : 'बोंड भोक व गुलाबी लक्षणे',
       scientific: 'Pectinophora gossypiella',
       tag: isEn ? 'Pest Infestation' : 'कीट प्रादुर्भाव'
@@ -66,7 +66,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       id: 'soybean_rust',
       title: isEn ? 'Soybean Leaf Rust' : 'सोयाबीन तांबेरा रोग',
       crop: 'Soybean',
-      url: 'https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80',
+      url: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80',
       label: isEn ? 'Abaxial Foliar Pustules' : 'पानावरील तांबेरी ठिपके',
       scientific: 'Phakopsora pachyrhizi',
       tag: isEn ? 'Fungal Spores' : 'बुरशी बीजाणू'
@@ -75,7 +75,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       id: 'tomato_blight',
       title: isEn ? 'Tomato Late Blight' : 'टोमॅटो करपा रोग',
       crop: 'Tomato',
-      url: 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=600&q=80',
+      url: 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80',
       label: isEn ? 'Water-Soaked Lesions' : 'पाणी भिनलेले जखमेचे ठिपके',
       scientific: 'Phytophthora infestans',
       tag: isEn ? 'Oomycete Blight' : 'ओमाइसीट रोग'
@@ -101,7 +101,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       if (cases && cases.length > 0) setActiveCase(cases[0]);
 
       // Pre-run diagnosis on default sample photo
-      runDiagnosis(p.id, p.crop_name || 'Cotton', null, 'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80');
+      runDiagnosis(p.id, p.crop_name || 'Cotton', null, 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80');
     } catch (err) {
       console.error("Farmer load error:", err);
     }
@@ -154,7 +154,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       const formData = new FormData();
       formData.append('farm_id', profile?.id || 'farm_101');
       formData.append('crop_hint', selectedCrop);
-      formData.append('image_url', selectedSampleImage || 'https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80');
+      formData.append('image_url', selectedSampleImage || 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80');
 
       const newCase = await api.createCase(formData);
       setCaseSuccessMsg(newCase.case_id);
@@ -893,7 +893,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
               <span className="font-bold text-slate-900 block">{isEn ? 'Day 0: Initial Infestation (Pre-Spray)' : 'दिवस ०: सुरुवातीचा प्रादुर्भाव (फवारणीपूर्वी)'}</span>
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80"
+                  src="https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80"
                   alt={isEn ? 'Day 0' : 'दिवस ०'}
                   className="w-full h-64 object-cover rounded-2xl border-2 border-rose-300"
                 />
@@ -905,7 +905,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
               <span className="font-bold text-slate-900 block">{isEn ? 'Day 7: Post-Treatment Healing' : 'दिवस ७: उपचारानंतर भरून येणे'}</span>
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80"
+                  src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80"
                   alt={isEn ? 'Day 7' : 'दिवस ७'}
                   className="w-full h-64 object-cover rounded-2xl border-2 border-emerald-400"
                 />

@@ -156,7 +156,7 @@ class CaseManager:
         case1 = CaseRecord(
             case_id="MH-YAV-10231",
             farmer_profile=p1,
-            image_url="https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80",
+            image_url="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
             diagnosis=diag1,
             future_risk=risk1,
             status="PENDING_FIELD_VERIFICATION",
@@ -179,10 +179,10 @@ class CaseManager:
                 officer_assessment="VERIFIED",
                 inspection_notes="Trap count is 14 moths/night exceeding ETL of 8. Suspected Pink Bollworm vs Early American Bollworm crossover.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80"
+                    "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
                 ]
             ),
             follow_up_scheduled_at=(datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d"),
@@ -206,7 +206,7 @@ class CaseManager:
         case2 = CaseRecord(
             case_id="MH-YAV-10228",
             farmer_profile=p2,
-            image_url="https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80",
+            image_url="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
             diagnosis=diag2,
             future_risk=risk2,
             status="PENDING_FIELD_VERIFICATION",
@@ -229,9 +229,9 @@ class CaseManager:
                 officer_assessment="UNCERTAIN",
                 inspection_notes="Symptoms resemble both early soybean rust and Cercospora leaf spot. Requires specialist pathology review.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=600&q=80"
+                    "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
                 ]
             ),
             follow_up_scheduled_at=(datetime.now() + timedelta(days=5)).strftime("%Y-%m-%d"),
@@ -243,7 +243,7 @@ class CaseManager:
         case3 = CaseRecord(
             case_id="MH-YAV-10195",
             farmer_profile=p3,
-            image_url="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80",
+            image_url="https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
             diagnosis=diag1,
             future_risk=risk1,
             status="TREATMENT_APPLIED",
@@ -261,9 +261,9 @@ class CaseManager:
                 officer_assessment="VERIFIED",
                 officer_observation="Foliage chlorosis and water-soaked lesions observed on lower leaves.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80"
+                    "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
                 ]
             ),
             treatment_logs=[{
@@ -403,7 +403,7 @@ class CaseManager:
                     "result": "POSITIVE",
                     "technician_id": "TECH-409",
                     "observation": "Hyaline to light-brown echinulate urediniospores with equatorial germ pores observed on leaf abaxial scraping.",
-                    "micrograph_url": "https://images.unsplash.com/photo-1599420186946-7b6fb4e297f0?auto=format&fit=crop&w=600&q=80",
+                    "micrograph_url": "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80",
                     "completed_at": "2026-09-05T10:30:00"
                 }
             ]
@@ -502,7 +502,7 @@ class CaseManager:
     def create_case(
         self,
         farm_id: str,
-        image_url: str = "https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80",
+        image_url: str = "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
         user_id: str = "farmer_101",
         user_name: str = "Ramesh Tukaram Patil",
         crop_hint: Optional[str] = None
@@ -859,7 +859,7 @@ class CaseManager:
                 "farmer_name": "Ramesh Patil (रमेश पाटील)",
                 "crop": "Cotton",
                 "district": "Yavatmal",
-                "image_url": "https://images.unsplash.com/photo-1599818434736-2311f6c770c3?auto=format&fit=crop&w=600&q=80",
+                "image_url": "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
                 "ai_prediction": "Cotton Pink Bollworm (गुलाबी बोंडअळी)",
                 "ai_confidence_pct": 72.0,
                 "expert_ground_truth": "American Bollworm (अमेरिकन बोंडअळी)",
