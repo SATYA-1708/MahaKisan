@@ -573,11 +573,33 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
                   </div>
 
                   <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
-                    <span className="text-slate-400 text-[10px] font-bold uppercase">{isEn ? 'Pheromone Trap Status' : 'कामगंध सापळा स्थिती'}</span>
+                    <span className="text-slate-400 text-[10px] font-bold uppercase">
+                      {diagnosisResult.crop?.toLowerCase().includes('cotton') 
+                        ? (isEn ? 'Pheromone Trap Status' : 'कामगंध सापळा स्थिती')
+                        : diagnosisResult.crop?.toLowerCase().includes('soybean')
+                        ? (isEn ? 'Microclimate Humidity Risk' : 'हवामान आर्द्रता धोका')
+                        : diagnosisResult.crop?.toLowerCase().includes('tomato')
+                        ? (isEn ? 'Delta Pheromone Trap (Tuta)' : 'डेल्टा सापळा स्थिती')
+                        : diagnosisResult.crop?.toLowerCase().includes('onion')
+                        ? (isEn ? 'Sticky Card Status (Thrips)' : 'चिकट सापळा स्थिती')
+                        : (isEn ? 'Orchard Trap Telemetry' : 'फळबाग सापळा निरीक्षण')}
+                    </span>
                     <div className="text-sm font-black text-rose-600">
-                      {isEn ? '14 Moths/Night' : '१४ पतंग/रात्र'}
+                      {diagnosisResult.crop?.toLowerCase().includes('cotton') 
+                        ? (isEn ? '14 Moths/Night' : '१४ पतंग/रात्र')
+                        : diagnosisResult.crop?.toLowerCase().includes('soybean')
+                        ? (isEn ? '88% Relative Humidity' : '८८% सापेक्ष आर्द्रता')
+                        : diagnosisResult.crop?.toLowerCase().includes('tomato')
+                        ? (isEn ? '22 Moths/Night' : '२२ पतंग/रात्र')
+                        : diagnosisResult.crop?.toLowerCase().includes('onion')
+                        ? (isEn ? '38 Thrips / Card' : '३८ थ्रिप्स / कार्ड')
+                        : (isEn ? '18 Leafminer / Trap' : '१८ नागअळी / सापळा')}
                     </div>
-                    <span className="text-[10px] text-rose-600 font-semibold">{isEn ? 'Above ETL Threshold (8)' : 'ETL मर्यादेपेक्षा जास्त (८)'}</span>
+                    <span className="text-[10px] text-rose-600 font-semibold">
+                      {diagnosisResult.crop?.toLowerCase().includes('soybean')
+                        ? (isEn ? 'High Spore Germination Surge' : 'बीजाणू प्रसार व तांबेरा धोका')
+                        : (isEn ? 'Above ETL Threshold' : 'ETL मर्यादेपेक्षा जास्त')}
+                    </span>
                   </div>
                 </div>
 

@@ -135,15 +135,18 @@ class CurrentDiagnosisEngine:
 
         name_lower = (image_name or "").lower()
 
-        # Check for explicit filename hints (e.g. sample photos)
-        crop_hint_from_name = None
-        for k in ["cotton", "soybean", "tomato", "grapes", "pomegranate", "onion", "sugarcane"]:
-            if k in name_lower:
-                crop_hint_from_name = k
-                break
+        # Check for crop hint from explicit argument, filename, or profile
+        hint = (target_crop_hint or "").lower().strip()
+        if not hint and name_lower:
+            for k in ["cotton", "soybean", "tomato", "onion", "orange", "citrus", "grapes", "pomegranate", "sugarcane"]:
+                if k in name_lower:
+                    hint = k
+                    break
+        if not hint and profile and profile.crop_name:
+            hint = profile.crop_name.lower().strip()
 
         # 2. Case A: Non-Crop / Unclear Image Detection
-        if metrics and metrics.get("valid") and metrics.get("foliage_ratio", 0) < 0.10 and not crop_hint_from_name:
+        if metrics and metrics.get("valid") and metrics.get("foliage_ratio", 0) < 0.10 and not hint:
             ipm = get_authoritative_ipm("unclear_image")
             return SymptomDetection(
                 detected_entity="Non-Crop Object / Unclear Image (अस्पष्ट / पीक नसलेली प्रतिमा)",
@@ -163,7 +166,7 @@ class CurrentDiagnosisEngine:
             )
 
         # 3. Case B: 100% Healthy Crop Foliage Detection (No Disease)
-        if metrics and metrics.get("valid") and metrics.get("green_ratio", 0) > 0.88 and metrics.get("necrotic_ratio", 0) < 0.05 and metrics.get("rust_ratio", 0) < 0.04 and not crop_hint_from_name:
+        if metrics and metrics.get("valid") and metrics.get("green_ratio", 0) > 0.88 and metrics.get("necrotic_ratio", 0) < 0.05 and metrics.get("rust_ratio", 0) < 0.04 and not hint:
             crop_name = profile.crop_name if (profile and profile.crop_name) else "Field Crop"
             ipm = get_authoritative_ipm("healthy_crop", crop=crop_name)
             return SymptomDetection(
@@ -187,7 +190,7 @@ class CurrentDiagnosisEngine:
         # Determine disease by visual spectrum + hints
         detected_entity = "Cotton Pink Bollworm (गुलाबी बोंडअळी)"
         scientific_name = "Pectinophora gossypiella"
-        crop_name = profile.crop_name if profile else "Cotton"
+        crop_name = "Cotton"
         confidence = 0.954
         severity = SeverityLevel.MODERATE
         plant_part = "Boll & Flower / बोंड आणि फुले"
@@ -199,7 +202,7 @@ class CurrentDiagnosisEngine:
         ipm_key = "cotton_pink_bollworm"
         default_bbox = {"x": 0.22, "y": 0.25, "width": 0.52, "height": 0.48}
 
-        if crop_hint_from_name == "tomato" or (metrics and metrics.get("necrotic_ratio", 0) > 0.20 and metrics.get("green_ratio", 0) > 0.40):
+        if "tomato" in hint or (metrics and metrics.get("necrotic_ratio", 0) > 0.20 and metrics.get("green_ratio", 0) > 0.40):
             detected_entity = "Tomato Late Blight (करपा / लेट ब्लाईट)"
             scientific_name = "Phytophthora infestans"
             crop_name = "Tomato"
@@ -214,7 +217,7 @@ class CurrentDiagnosisEngine:
             ipm_key = "tomato_late_blight"
             default_bbox = {"x": 0.20, "y": 0.22, "width": 0.55, "height": 0.50}
 
-        elif crop_hint_from_name == "onion" or (metrics and metrics.get("purple_ratio", 0) > 0.08):
+        elif "onion" in hint or (metrics and metrics.get("purple_ratio", 0) > 0.08):
             detected_entity = "Onion Purple Blotch (कांद्यावरील जांभळा करपा)"
             scientific_name = "Alternaria porri"
             crop_name = "Onion"
@@ -229,7 +232,7 @@ class CurrentDiagnosisEngine:
             ipm_key = "onion_purple_blotch"
             default_bbox = {"x": 0.28, "y": 0.22, "width": 0.44, "height": 0.52}
 
-        elif crop_hint_from_name == "soybean" or (metrics and metrics.get("rust_ratio", 0) > 0.12):
+        elif "soybean" in hint or (metrics and metrics.get("rust_ratio", 0) > 0.12):
             detected_entity = "Soybean Rust (तांबेरा रोग)"
             scientific_name = "Phakopsora pachyrhizi"
             crop_name = "Soybean"
@@ -244,7 +247,22 @@ class CurrentDiagnosisEngine:
             ipm_key = "soybean_rust"
             default_bbox = {"x": 0.18, "y": 0.20, "width": 0.58, "height": 0.54}
 
-        elif crop_hint_from_name == "grapes" or (metrics and metrics.get("white_downy_ratio", 0) > 0.15):
+        elif "orange" in hint or "citrus" in hint:
+            detected_entity = "Citrus / Orange Canker (संत्रा खैरा रोग)"
+            scientific_name = "Xanthomonas axonopodis pv. citri"
+            crop_name = "Orange"
+            confidence = 0.942
+            severity = SeverityLevel.MODERATE
+            plant_part = "Fruit Rind & Leaves / फळाची साल व पाने"
+            symptoms = [
+                "Raised, rough corky brown crater-like lesions with oily yellow haloes",
+                "Premature fruit drop and dark circular rind blemishes",
+                "Twig dieback on mature vegetative shoots"
+            ]
+            ipm_key = "citrus_canker"
+            default_bbox = {"x": 0.22, "y": 0.24, "width": 0.54, "height": 0.50}
+
+        elif "grapes" in hint or (metrics and metrics.get("white_downy_ratio", 0) > 0.15):
             detected_entity = "Grapes Downy Mildew (द्राक्षांवरील केवडा रोग)"
             scientific_name = "Plasmopara viticola"
             crop_name = "Grapes"
@@ -259,7 +277,7 @@ class CurrentDiagnosisEngine:
             ipm_key = "grapes_downy_mildew"
             default_bbox = {"x": 0.24, "y": 0.26, "width": 0.48, "height": 0.46}
 
-        elif crop_hint_from_name == "pomegranate":
+        elif "pomegranate" in hint:
             detected_entity = "Pomegranate Bacterial Blight (तेलकट डाग / तेल्या)"
             scientific_name = "Xanthomonas axonopodis pv. punicae"
             crop_name = "Pomegranate"
@@ -274,7 +292,7 @@ class CurrentDiagnosisEngine:
             ipm_key = "pomegranate_bacterial_blight"
             default_bbox = {"x": 0.25, "y": 0.28, "width": 0.50, "height": 0.45}
 
-        elif crop_hint_from_name == "sugarcane":
+        elif "sugarcane" in hint:
             detected_entity = "Sugarcane Red Rot (उसावरील तांबडे कूज / लाल सड)"
             scientific_name = "Colletotrichum falcatum"
             crop_name = "Sugarcane"

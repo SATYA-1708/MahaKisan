@@ -380,6 +380,53 @@ IPM_DATABASE: Dict[str, IPMRecommendation] = {
         restricted_substances_warning="No foliar chemical spray can cure internal red rot once cane is heavily infected; prevention via sett treatment is paramount."
     ),
 
+    # 7B. CITRUS / ORANGE - CITRUS CANKER
+    "citrus_canker": IPMRecommendation(
+        pest_or_disease="Citrus / Orange Canker (संत्रा खैरा रोग)",
+        scientific_name="Xanthomonas axonopodis pv. citri",
+        affected_crops=["Orange", "Citrus", "Lemon", "Mosambi"],
+        symptoms_summary={
+            "en": "Raised, corky crater-like necrotic lesions on leaves, twigs, and fruit rind with characteristic oily water-soaked yellow halo margin.",
+            "mr": "पाने, फांद्या व संत्र्याच्या फळावर खडबडीत चट्टे (कॅन्कर) येतात ज्याभोवती पिवळसर वलय असते. फळे डागाळतात व गळतात.",
+            "hi": "पत्तों और फलों पर उभरे हुए खुरदरे भूरे धब्बे जिनके चारों ओर पीला घेरा होता है।"
+        },
+        cultural_control=[
+            {"en": "Prune and burn severely cankered twigs before monsoon flush.", "mr": "पावसाळ्यापूर्वी कीडग्रस्त व खैरा झालेल्या फांद्या छाटून नष्ट करा."},
+            {"en": "Control Citrus Leafminer (Phyllocnistis citrella) promptly to prevent bacterial entry wounds.", "mr": "जिवाणूचा शिरकाव रोखण्यासाठी नागअळीचे (Leafminer) त्वरित नियंत्रण करा."}
+        ],
+        mechanical_control=[
+            {"en": "Install windbreaks (Casuarina / Bamboo) around citrus orchards to reduce wind-driven rain dispersal.", "mr": "बागेभोवती वारा प्रतिबंधक झाडे लावावीत."}
+        ],
+        biological_control=[
+            {"en": "Spray Neem Oil 1% (10 ml/L) to deter leafminer and reduce leaf punctures.", "mr": "नागअळी नियंत्रणासाठी नीम तेल १% (१० मिली/लिटर) फवारा."}
+        ],
+        chemical_control=[
+            {
+                "trade_name": "Streptocycline 90% + Copper Oxychloride 50% WP",
+                "active_ingredient": "Streptomycin sulphate 90% + Tetracycline 10% + COC 50%",
+                "dosage_per_15l_pump": "1.5 gm Streptocycline + 35 gm COC in 15L water",
+                "dosage_per_acre": "20 gm Streptocycline + 500 gm COC in 200L water",
+                "phi_days": 15,
+                "toxicity_label": ToxicityLabel.BLUE,
+                "cibr_approval": "CIBRC-REG-Citrus-Strep-2024"
+            },
+            {
+                "trade_name": "Bordeaux Mixture 1%",
+                "active_ingredient": "Copper Sulphate + Slaked Lime (1:1:100)",
+                "dosage_per_15l_pump": "1% solution (150 gm copper sulphate + 150 gm lime / 15L)",
+                "dosage_per_acre": "2 kg Copper Sulphate + 2 kg Lime in 200L water",
+                "phi_days": 10,
+                "toxicity_label": ToxicityLabel.GREEN,
+                "cibr_approval": "CIBRC-REG-Citrus-Bordeaux-2023"
+            }
+        ],
+        safety_instructions=[
+            {"en": "Do not mix bactericides with systemic organophosphate insecticides in the same tank.", "mr": "जिवाणूनाशके इतर कीटकनाशकांसोबत मिसळताना सुसंगतता तपासा."},
+            {"en": "Spray immediately after hail or heavy rainstorms to seal wound sites.", "mr": "वादळी पाऊस किंवा गारपिटीनंतर तातडीने बोर्डो मिश्रणाची फवारणी करा."}
+        ],
+        restricted_substances_warning="Do not spray copper fungicides during peak blooming to avoid blossom abortion."
+    ),
+
     # 8. HEALTHY CROP
     "healthy_crop": IPMRecommendation(
         pest_or_disease="Healthy Crop (निरोगी पीक — कोणतीही कीड/रोग नाही)",
