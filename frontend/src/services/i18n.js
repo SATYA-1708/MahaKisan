@@ -1,6 +1,6 @@
 export const translations = {
   mr: {
-    appTitle: "महाकिसान रक्षक",
+    appTitle: "फसल रक्षक",
     appSubtitle: "महाराष्ट्र शासन — पिकांवरील रोग व कीड पूर्वसूचना आणि एकात्मिक व्यवस्थापन प्रणाली",
     tagline: "अचूक रोग निदान • हवामान आधारित पूर्व चेतावणी • प्रमाणित कीडनाशक शिफारसी",
     
@@ -228,7 +228,7 @@ export const translations = {
   },
 
   hi: {
-    appTitle: "महाकिसान रक्षक",
+    appTitle: "फसल रक्षक",
     appSubtitle: "महाराष्ट्र सरकार — फसल रोग एवं कीट पूर्व चेतावनी व एकीकृत प्रबंधन प्रणाली",
     tagline: "सटीक रोग पहचान • मौसम आधारित जोखिम पूर्वानुमान • प्रमाणित कीटनाशक सिफारिशें",
 
@@ -541,20 +541,16 @@ ingestion: {
         Pu: "पुणे",
         Ra: "रायगढ़",
         Rt: "रत्नागिरी",
-        Sa: "सांगली",
-        Sn: "सतारा",
-        Si: "सिंधुदुर्ग",
-        So: "सोलापुर",
-        Th: "ठाणे",
-        Wr: "वर्धा",
-        Wt: "वाशिम",
+        Sb: "संभाजीनगर",
+        Sl: "सोलापूर",
+        Wt: "वाशीम",
         Yv: "यवतमाळ"
       }
     }
   },
 
   en: {
-    appTitle: "MahaKisan Rakshak",
+    appTitle: "Fasal Rakshak",
     appSubtitle: "Government of Maharashtra — Crop Disease Early Warning, Detection & IPM System",
     tagline: "Instant AI Vision Diagnosis • 7-Day Epidemiological Risk • Authoritative CIBRC IPM Advisory",
 
@@ -605,7 +601,7 @@ ingestion: {
 
     // Farmer Portal Specific Translations
     farmerPortal: {
-      title: "MahaKisan Rakshak - Farmer Advisory & Scan",
+      title: "Fasal Rakshak - Farmer Advisory & Scan",
       subtitle: "Instant AI Vision Diagnosis • 7-Day Epidemiological Risk • Authoritative CIBRC IPM Advisory",
       farmerPassportTitle: "Farm & Crop Profile",
       farmerPassportSubtitle: "Context powers both Computer Vision priors and Epidemiological Risk models.",

@@ -69,7 +69,7 @@ export function App() {
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <span className="text-white font-bold">
-              {currentLang === 'en' ? 'MahaKisan Rakshak' : 'महाकिसान रक्षक (MahaKisan Rakshak)'}
+              {currentLang === 'en' ? 'Fasal Rakshak' : 'फसल रक्षक (Fasal Rakshak)'}
             </span>
             <span>• SIH Problem Statement 26131</span>
           </div>

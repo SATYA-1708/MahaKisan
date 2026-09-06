@@ -271,9 +271,9 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
 
     let speechText = '';
     if (isEn) {
-      speechText = `MahaKisan Farmer Advisory for your ${selectedCrop} crop. Condition: ${diagnosisResult.detected_entity.split('(')[0]}. Current severity is ${diagnosisResult.severity.split('(')[0]}. Apply ${ipm?.chemical_control?.[0]?.trade_name || 'Emamectin Benzoate 5% SG'} at ${ipm?.chemical_control?.[0]?.dosage_per_15l_pump || '7.5 grams'} per fifteen liter pump. Observe 14 days waiting period before harvesting.`;
+      speechText = `Fasal Rakshak Farmer Advisory for your ${selectedCrop} crop. Condition: ${diagnosisResult.detected_entity.split('(')[0]}. Current severity is ${diagnosisResult.severity.split('(')[0]}. Apply ${ipm?.chemical_control?.[0]?.trade_name || 'Emamectin Benzoate 5% SG'} at ${ipm?.chemical_control?.[0]?.dosage_per_15l_pump || '7.5 grams'} per fifteen liter pump. Observe 14 days waiting period before harvesting.`;
     } else {
-      speechText = `महाकिसान सल्ला: तुमच्या ${selectedCrop} पिकावर ${diagnosisResult.detected_entity} रोगाची लक्षणे आढळली आहेत. शिफारस: ${ipm?.chemical_control?.[0]?.trade_name} ची प्रति १५ लिटर पंपासाठी ७.५ ग्रॅम फवारणी करा व १४ दिवस प्रतीक्षा कालावधी पाळा.`;
+      speechText = `फसल रक्षक सल्ला: तुमच्या ${selectedCrop} पिकावर ${diagnosisResult.detected_entity} रोगाची लक्षणे आढळली आहेत. शिफारस: ${ipm?.chemical_control?.[0]?.trade_name} ची प्रति १५ लिटर पंपासाठी ७.५ ग्रॅम फवारणी करा व १४ दिवस प्रतीक्षा कालावधी पाळा.`;
     }
 
     voiceService.speak(speechText, currentLang);

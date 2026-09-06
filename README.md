@@ -1,7 +1,7 @@
-# MahaKisan Rakshak (महाकिसान रक्षक)
+# Fasal Rakshak (फसल रक्षक)
 ### Smart India Hackathon (SIH) Problem Statement ID: 26131
 **Title**: Early detection and management of crop diseases and pest infestations  
-**Organization**: Government of Maharashtra (Maharashtra State Innovation Society / Department of Agriculture)  
+**Organization**: Department of Agriculture  
 **Theme**: Agriculture, FoodTech & Rural Development  
 
 ---

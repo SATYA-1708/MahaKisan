@@ -24,7 +24,7 @@ class AuditLogger:
             action="SYSTEM_INITIALIZE",
             entity_type="SYSTEM",
             entity_id="SYS_MAHA_001",
-            details={"event": "MahaKisan Rakshak Node Activated", "environment": "Production - Maharashtra Cluster"}
+            details={"event": "Fasal Rakshak Node Activated", "environment": "Production Cluster"}
         )
         self.record(
             user_id="expert_303",

@@ -5,8 +5,8 @@ from app.api.routes import router
 from app.core.system_monitor import system_monitor
 
 app = FastAPI(
-    title="MahaKisan Rakshak API (महाकिसान रक्षक)",
-    description="Early Detection, Risk Forecasting & Integrated Pest Management Platform for Govt of Maharashtra (SIH 26131)",
+    title="Fasal Rakshak API (फसल रक्षक)",
+    description="Early Detection, Risk Forecasting & Integrated Pest Management Platform (SIH 26131)",
     version="2.4.0"
 )
 
@@ -35,8 +35,8 @@ app.include_router(router, prefix="/api")
 @app.get("/")
 def root():
     return {
-        "platform": "MahaKisan Rakshak (महाकिसान रक्षक)",
-        "organization": "Government of Maharashtra (Maharashtra State Innovation Society)",
+        "platform": "Fasal Rakshak (फसल रक्षक)",
+        "organization": "Department of Agriculture",
         "department": "Department of Agriculture",
         "sih_problem_id": "26131",
         "status": "OPERATIONAL",
