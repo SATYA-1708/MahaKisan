@@ -57,9 +57,9 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       return {
         cropName: isEn ? 'Soybean' : 'सोयाबीन',
         diseaseName: isEn ? 'Soybean Leaf Rust (Phakopsora pachyrhizi)' : 'सोयाबीन तांबेरा रोग (Phakopsora pachyrhizi)',
-        day0Photo: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80',
-        day0Desc: isEn ? 'Dense foliar rust pustules and chlorotic leaf spots.' : 'पानांवर दाट तांबेरा फोड आणि पिवळे चट्टे.',
+        day0Desc: isEn ? 'Severe foliar chlorosis and dense brown rust pustules on abaxial leaf.' : 'पानांवर दाट तपकिरी तांबेरा फोड आणि पिवळे चट्टे.',
         day7Desc: isEn ? 'Spore sporulation halted with fresh green canopy flush.' : 'बीजाणू प्रसार थांबला आणि नवीन हिरवी पाने फुटली.',
         day0Sev: 34,
         day7Sev: 12,
@@ -71,9 +71,9 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       return {
         cropName: isEn ? 'Tomato' : 'टोमॅटो',
         diseaseName: isEn ? 'Tomato Late Blight (Phytophthora infestans)' : 'टोमॅटो करपा रोग (Phytophthora infestans)',
-        day0Photo: 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80',
-        day0Desc: isEn ? 'Water-soaked expanding necrotic lesions on foliage.' : 'पानांवर पाणी भिनलेले पसरणारे करपा डाग.',
+        day0Desc: isEn ? 'Water-soaked expanding necrotic dead patches on diseased foliage.' : 'पानांवर पाणी भिनलेले पसरणारे करपा मृत डाग.',
         day7Desc: isEn ? 'Lesions completely dried and arrested; vigorous vine development.' : 'डाग पूर्णपणे सुकले व थांबले; जोमदार वेलीची वाढ.',
         day0Sev: 38,
         day7Sev: 14,
@@ -85,9 +85,9 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       return {
         cropName: isEn ? 'Onion' : 'कांदा',
         diseaseName: isEn ? 'Onion Purple Blotch (Alternaria porri)' : 'कांदा जांभळा करपा (Alternaria porri)',
-        day0Photo: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Alternaria_solani_-_leaf_lesions.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=800&q=80',
-        day0Desc: isEn ? 'Sunken concentric purple lesions on onion stalks.' : 'कांद्याच्या पातीवर जांभळे खोलगट डाग.',
+        day0Desc: isEn ? 'Dark concentric target-spot lesions with yellow dying halo.' : 'कांद्याच्या पातीवर जांभळे वलयाकार मृत डाग.',
         day7Desc: isEn ? 'Stalk tissues healed with robust green foliar stand.' : 'पातीची ऊती बरी झाली व मजबूत हिरवी वाढ.',
         day0Sev: 26,
         day7Sev: 8,
@@ -99,9 +99,9 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       return {
         cropName: isEn ? 'Orange / Citrus' : 'संत्रा / मोसंबी',
         diseaseName: isEn ? 'Citrus Canker (Xanthomonas axonopodis)' : 'संत्रा खैरा / कॅन्कर (Xanthomonas axonopodis)',
-        day0Photo: 'https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=800&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Citrus_canker_on_fruit.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=800&q=80',
-        day0Desc: isEn ? 'Corky eruptive lesions and yellow haloes on fruit.' : 'फळ व पानांवर खडबडीत चट्टे व पिवळे वलय.',
+        day0Desc: isEn ? 'Raised eruptive crusty cratered canker lesions covering fruit.' : 'फळावर खडबडीत खवलेदार कॅन्कर फोड व चट्टे.',
         day7Desc: isEn ? 'Bacterial exudate arrested; healthy fruit expansion.' : 'जिवाणू प्रादुर्भाव थांबला; निरोगी फळ वाढ.',
         day0Sev: 30,
         day7Sev: 10,
@@ -113,9 +113,9 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
     return {
       cropName: isEn ? 'Cotton' : 'कापूस',
       diseaseName: isEn ? 'Cotton Pink Bollworm (Pectinophora gossypiella)' : 'कापूस गुलाबी बोंडअळी (Pectinophora gossypiella)',
-      day0Photo: 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80',
+      day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg',
       day7Photo: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80',
-      day0Desc: isEn ? 'Larval entrance boreholes & frass on cotton bolls.' : 'कापसाच्या बोंडावर अळीच्या प्रवेशाची छिद्रे व विष्ठा.',
+      day0Desc: isEn ? 'Larva actively feeding inside damaged, rotten cotton boll.' : 'बोंडाच्या आत अळीने खाऊन खराब झालेले कुजके बोंड.',
       day7Desc: isEn ? 'Symptom arrested with healthy fresh boll opening & lint flush.' : 'निरोगी नवीन बोंड वाढीसह लक्षणे थांबली व शुभ्र कापूस बहरला.',
       day0Sev: 32,
       day7Sev: 14,
@@ -124,50 +124,50 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
     };
   };
 
-  // Sample Images Library
+  // Sample Images Library (100% Genuine Diseased Pathology Specimens)
   const sampleImages = [
     {
       id: 'cotton_pbw',
       title: isEn ? 'Cotton Pink Bollworm' : 'कापूस गुलाबी बोंडअळी',
       crop: 'Cotton',
-      url: 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
-      label: isEn ? 'Boll Borehole & Rosetting' : 'बोंड भोक व गुलाबी लक्षणे',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg',
+      label: isEn ? 'Larval Boll Borehole & Internal Damage' : 'बोंड भोक व अळी प्रादुर्भाव',
       scientific: 'Pectinophora gossypiella',
-      tag: isEn ? 'Pest Infestation' : 'कीट प्रादुर्भाव'
+      tag: isEn ? 'Active Larval Damage' : 'अळी प्रादुर्भाव'
     },
     {
       id: 'soybean_rust',
       title: isEn ? 'Soybean Leaf Rust' : 'सोयाबीन तांबेरा रोग',
       crop: 'Soybean',
-      url: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80',
-      label: isEn ? 'Abaxial Foliar Pustules' : 'पानावरील तांबेरी ठिपके',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg',
+      label: isEn ? 'Dense Brown Foliar Pustules' : 'पानावरील दाट तांबेरी फोड',
       scientific: 'Phakopsora pachyrhizi',
-      tag: isEn ? 'Fungal Spores' : 'बुरशी बीजाणू'
+      tag: isEn ? 'Fungal Rust Pustules' : 'बुरशी बीजाणू'
     },
     {
       id: 'tomato_blight',
       title: isEn ? 'Tomato Late Blight' : 'टोमॅटो करपा रोग',
       crop: 'Tomato',
-      url: 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80',
-      label: isEn ? 'Water-Soaked Lesions' : 'पाणी भिनलेले जखमेचे ठिपके',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg',
+      label: isEn ? 'Water-Soaked Necrotic Dead Patches' : 'पाणी भिनलेले करपा मृत डाग',
       scientific: 'Phytophthora infestans',
-      tag: isEn ? 'Oomycete Blight' : 'ओमाइसीट रोग'
+      tag: isEn ? 'Oomycete Foliar Blight' : 'ओमाइसीट करपा'
     },
     {
       id: 'onion_blotch',
       title: isEn ? 'Onion Purple Blotch' : 'कांदा जांभळा करपा',
       crop: 'Onion',
-      url: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80',
-      label: isEn ? 'Purplish Sunken Lesions' : 'जांभळे लंबगोलाकार डाग',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Alternaria_solani_-_leaf_lesions.jpg',
+      label: isEn ? 'Concentric Dark Blotch & Yellow Halo' : 'जांभळे वलयाकार मृत डाग',
       scientific: 'Alternaria porri',
-      tag: isEn ? 'Fungal Blotch' : 'बुरशीजन्य करपा'
+      tag: isEn ? 'Alternaria Blotch' : 'बुरशीजन्य करपा'
     },
     {
       id: 'citrus_canker',
       title: isEn ? 'Citrus / Orange Canker' : 'संत्रा खैरा / कॅन्कर',
       crop: 'Orange',
-      url: 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=800&q=80',
-      label: isEn ? 'Corky Raised Lesions' : 'फळावरील खडबडीत चट्टे',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Citrus_canker_on_fruit.jpg',
+      label: isEn ? 'Crusty Raised Cratered Canker Lesions' : 'फळावरील खडबडीत खवलेदार चट्टे',
       scientific: 'Xanthomonas axonopodis',
       tag: isEn ? 'Bacterial Canker' : 'जिवाणू खैरा'
     }

@@ -232,7 +232,7 @@ class CaseManager:
         case1 = CaseRecord(
             case_id="MH-YAV-10231",
             farmer_profile=p1,
-            image_url="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
+            image_url="https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg",
             diagnosis=diag1,
             future_risk=risk1,
             status="PENDING_FIELD_VERIFICATION",
@@ -255,10 +255,10 @@ class CaseManager:
                 officer_assessment="VERIFIED",
                 inspection_notes="Trap count is 14 moths/night exceeding ETL of 8. Suspected Pink Bollworm vs Early American Bollworm crossover.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
+                    "https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/1/11/Pectinophora_gossypiella_5006025.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg"
                 ]
             ),
             follow_up_scheduled_at=(datetime.now() + timedelta(days=7)).strftime("%Y-%m-%d"),
@@ -282,7 +282,7 @@ class CaseManager:
         case2 = CaseRecord(
             case_id="MH-YAV-10228",
             farmer_profile=p2,
-            image_url="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+            image_url="https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg",
             diagnosis=diag2,
             future_risk=risk2,
             status="PENDING_FIELD_VERIFICATION",
@@ -305,9 +305,9 @@ class CaseManager:
                 officer_assessment="UNCERTAIN",
                 inspection_notes="Symptoms resemble both early soybean rust and Cercospora leaf spot. Requires specialist pathology review.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
+                    "https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/4/4b/Soybean_rust.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg"
                 ]
             ),
             follow_up_scheduled_at=(datetime.now() + timedelta(days=5)).strftime("%Y-%m-%d"),
@@ -328,7 +328,7 @@ class CaseManager:
         case4 = CaseRecord(
             case_id="MH-PUN-10312",
             farmer_profile=p4,
-            image_url="https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+            image_url="https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg",
             diagnosis=diag4,
             future_risk=risk4,
             status="PENDING_FIELD_VERIFICATION",
@@ -349,8 +349,8 @@ class CaseManager:
                 officer_assessment="VERIFIED",
                 inspection_notes="Immediate systemic fungicide intervention mandatory.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80"
+                    "https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/e/e9/Tomato_with_Phytophthora_infestans_%28late_blight%29_2.jpg"
                 ]
             ),
             follow_up_scheduled_at=(datetime.now() + timedelta(days=4)).strftime("%Y-%m-%d"),
@@ -371,7 +371,7 @@ class CaseManager:
         case5 = CaseRecord(
             case_id="MH-NSK-10405",
             farmer_profile=p5,
-            image_url="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+            image_url="https://upload.wikimedia.org/wikipedia/commons/0/04/Alternaria_solani_-_leaf_lesions.jpg",
             diagnosis=diag5,
             future_risk=risk5,
             status="ASSIGNED",
@@ -388,7 +388,7 @@ class CaseManager:
         case3 = CaseRecord(
             case_id="MH-YAV-10195",
             farmer_profile=p3,
-            image_url="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80",
+            image_url="https://upload.wikimedia.org/wikipedia/commons/1/11/Pectinophora_gossypiella_5006025.jpg",
             diagnosis=diag1,
             future_risk=risk1,
             status="TREATMENT_APPLIED",
@@ -406,8 +406,8 @@ class CaseManager:
                 officer_assessment="VERIFIED",
                 officer_observation="Foliage chlorosis and water-soaked lesions observed on lower leaves.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80"
+                    "https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/1/11/Pectinophora_gossypiella_5006025.jpg"
                 ]
             ),
             treatment_logs=[{

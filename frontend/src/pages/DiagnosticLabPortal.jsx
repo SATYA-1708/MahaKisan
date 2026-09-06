@@ -95,14 +95,14 @@ export const DiagnosticLabPortal = ({ currentLang = 'en' }) => {
     // 1. Farmer's Initial Submission Photo
     const farmerPhotoUrl = sample.case_image_url || (
       sample.crop?.toLowerCase().includes('cotton')
-        ? 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80'
+        ? 'https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg'
         : sample.crop?.toLowerCase().includes('soybean')
-        ? 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80'
+        ? 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg'
         : sample.crop?.toLowerCase().includes('onion')
-        ? 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80'
+        ? 'https://upload.wikimedia.org/wikipedia/commons/0/04/Alternaria_solani_-_leaf_lesions.jpg'
         : sample.crop?.toLowerCase().includes('orange') || sample.crop?.toLowerCase().includes('citrus')
-        ? 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=800&q=80'
-        : 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80'
+        ? 'https://upload.wikimedia.org/wikipedia/commons/2/25/Citrus_canker_on_fruit.jpg'
+        : 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg'
     );
     
     photos.push({
@@ -118,12 +118,10 @@ export const DiagnosticLabPortal = ({ currentLang = 'en' }) => {
     const fieldPhotoUrls = (sample.field_photos && sample.field_photos.length > 0)
       ? sample.field_photos
       : [
-          sample.crop?.toLowerCase().includes('cotton') 
-            ? 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80'
-            : 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80'
+          'https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/9/99/Late_blight_on_tomato_stem_%283727561021%29.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/4/4b/Soybean_rust.jpg'
         ];
 
     const angleMeta = isEn ? [

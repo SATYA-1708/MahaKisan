@@ -89,20 +89,20 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
 
     // Crop-specific authentic Day 0 / Day 7 image pairs, severities, and CIBRC treatments
     let defaultData = {
-      day0Photo: 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=600&q=80',
+      day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg',
       day7Photo: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=600&q=80',
       day0Severity: 28,
       day7Severity: 11,
       treatmentName: 'Emamectin Benzoate 5% SG @ 7.5 gm / 15L pump',
       secondLineMolecule: 'Chlorantraniliprole 18.5% SC (Coragen) @ 6 ml / 15L pump',
       secondLineNotes: isEn ? 'Rotated to Anthranilic Diamide chemistry to counter suspected OP/pyrethroid tolerance.' : 'सहनशीलतेवर मात करण्यासाठी अँथ्रानिलिक डायमाइड रसायन बदलले.',
-      day0Desc: isEn ? 'Boreholes & frass on bolls' : 'बोंडांवर छिद्रे व अळीची विष्ठा',
+      day0Desc: isEn ? 'Larva actively feeding inside rotten boll' : 'बोंडाच्या आत अळी व कुजकेपणा',
       day7Desc: isEn ? 'Clean boll development, zero fresh frass' : 'स्वच्छ बोंड विकास, नवीन विष्ठा नाही'
     };
 
     if (crop.includes('soybean') || entity.includes('rust') || entity.includes('तांबेरा')) {
       defaultData = {
-        day0Photo: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=600&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80',
         day0Severity: 34,
         day7Severity: 12,
@@ -114,7 +114,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
       };
     } else if (crop.includes('tomato') || entity.includes('late blight') || entity.includes('करपा')) {
       defaultData = {
-        day0Photo: 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=600&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
         day0Severity: 35,
         day7Severity: 14,
@@ -126,7 +126,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
       };
     } else if (crop.includes('onion') || entity.includes('purple blotch') || entity.includes('कांदा')) {
       defaultData = {
-        day0Photo: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Alternaria_solani_-_leaf_lesions.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=600&q=80',
         day0Severity: 24,
         day7Severity: 8,
@@ -138,7 +138,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
       };
     } else if (crop.includes('orange') || crop.includes('citrus') || entity.includes('canker') || entity.includes('कॅन्कर')) {
       defaultData = {
-        day0Photo: 'https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=600&q=80',
+        day0Photo: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Citrus_canker_on_fruit.jpg',
         day7Photo: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=600&q=80',
         day0Severity: 30,
         day7Severity: 10,
@@ -1005,7 +1005,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 1. {isEn ? 'Leaf Close-up' : 'पानाचा जवळून फोटो'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoLeaf || 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=400&q=80'} 
+                      src={fieldPhotoLeaf || 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg'} 
                       alt={isEn ? 'Leaf' : 'पान'} 
                       className="w-full h-full object-cover"
                     />
@@ -1044,7 +1044,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 2. {isEn ? 'Stem Inspection' : 'खोड तपासणी'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoStem || 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=400&q=80'} 
+                      src={fieldPhotoStem || 'https://upload.wikimedia.org/wikipedia/commons/9/99/Late_blight_on_tomato_stem_%283727561021%29.jpg'} 
                       alt={isEn ? 'Stem' : 'खोड'} 
                       className="w-full h-full object-cover"
                     />
@@ -1083,7 +1083,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 3. {isEn ? 'Fruit / Boll Damage' : 'फळ / बोंड नुकसान'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoFruit || 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=400&q=80'} 
+                      src={fieldPhotoFruit || 'https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg'} 
                       alt={isEn ? 'Boll' : 'बोंड'} 
                       className="w-full h-full object-cover"
                     />
@@ -1122,7 +1122,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                   <span className="font-bold text-slate-700 block text-[11px]">📷 4. {isEn ? 'Whole Plant Canopy' : 'संपूर्ण झाडाची छत्री'}</span>
                   <div className="aspect-square bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center relative group">
                     <img 
-                      src={fieldPhotoWhole || 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=400&q=80'} 
+                      src={fieldPhotoWhole || 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Soybean_rust.jpg'} 
                       alt={isEn ? 'Whole plant' : 'संपूर्ण झाड'} 
                       className="w-full h-full object-cover"
                     />

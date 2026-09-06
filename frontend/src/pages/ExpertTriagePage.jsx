@@ -316,21 +316,21 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
         }))
       : [
           {
-            title: isEn ? "Leaf Macro (Boreholes)" : "पानाचा क्लोज-अप",
+            title: isEn ? "Leaf Macro (Rust Pustules)" : "पानाचा क्लोज-अप",
             subtitle: isEn ? "Krishi Sevak Ground Truth" : "कृषी सेवक ऑन-साईट फोटो",
-            url: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+            url: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg",
             hasBBox: false
           },
           {
             title: isEn ? "Boll Internal Damage" : "बोंड अंतर्गत नुकसान",
             subtitle: isEn ? "Krishi Sevak Ground Truth" : "कृषी सेवक ऑन-साईट फोटो",
-            url: "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
+            url: "https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg",
             hasBBox: false
           },
           {
-            title: isEn ? "Canopy & Trap Surround" : "झाडाचा विस्तार व सापळा",
+            title: isEn ? "Canopy & Rust Sporulation" : "झाडाचा विस्तार व बीजाणू",
             subtitle: isEn ? "Krishi Sevak Ground Truth" : "कृषी सेवक ऑन-साईट फोटो",
-            url: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80",
+            url: "https://upload.wikimedia.org/wikipedia/commons/4/4b/Soybean_rust.jpg",
             hasBBox: false
           }
         ]
@@ -1514,7 +1514,7 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
                   farmer_name: "Ramesh Patil (रमेश पाटील)",
                   crop: "Cotton",
                   district: "Yavatmal",
-                  image_url: "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
+                  image_url: "https://upload.wikimedia.org/wikipedia/commons/3/35/Pinkbollworm.jpg",
                   ai_prediction: "Cotton Pink Bollworm (गुलाबी बोंडअळी)",
                   ai_confidence_pct: 72.0,
                   expert_ground_truth: "American Bollworm (अमेरिकन बोंडअळी)",
@@ -1526,7 +1526,7 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
                   farmer_name: "Suresh Rathod (सुरेश राठोड)",
                   crop: "Soybean",
                   district: "Yavatmal",
-                  image_url: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+                  image_url: "https://upload.wikimedia.org/wikipedia/commons/d/d7/Phakopsora_pachyrhizi.jpg",
                   ai_prediction: "Soybean Rust (तांबेरा रोग)",
                   ai_confidence_pct: 58.0,
                   expert_ground_truth: "Cercospora Leaf Spot (पानावरील करपा)",
@@ -1538,7 +1538,7 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
                   farmer_name: "Ganesh Jadhav (गणेश जाधव)",
                   crop: "Tomato",
                   district: "Pune",
-                  image_url: "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                  image_url: "https://upload.wikimedia.org/wikipedia/commons/e/eb/Late_blight_on_tomato_leaf_%287871756748%29.jpg",
                   ai_prediction: "Tomato Late Blight (टोमॅटो करपा)",
                   ai_confidence_pct: 89.0,
                   expert_ground_truth: "Tomato Late Blight (टोमॅटो करपा)",
@@ -1550,7 +1550,7 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
                   farmer_name: "Balasaheb Shinde (बाळासाहेब शिंदे)",
                   crop: "Onion",
                   district: "Nashik",
-                  image_url: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+                  image_url: "https://upload.wikimedia.org/wikipedia/commons/0/04/Alternaria_solani_-_leaf_lesions.jpg",
                   ai_prediction: "Onion Purple Blotch (जांभळा करपा)",
                   ai_confidence_pct: 82.0,
                   expert_ground_truth: "Onion Purple Blotch (जांभळा करपा)",
