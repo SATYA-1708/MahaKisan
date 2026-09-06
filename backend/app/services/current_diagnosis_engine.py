@@ -1,10 +1,15 @@
 import io
 import time
 import colorsys
-from typing import Optional, Dict, Any, List, Tuple
-from PIL import Image
+try:
+    from PIL import Image
+    PIL_AVAILABLE = True
+except ImportError:
+    Image = None
+    PIL_AVAILABLE = False
 
 from app.models.schemas import (
+
     SymptomDetection, SeverityLevel, FarmProfile, UserRole
 )
 from app.services.ipm_knowledge_base import get_authoritative_ipm
@@ -20,7 +25,10 @@ class CurrentDiagnosisEngine:
     def analyze_image_pixels(self, image_bytes: bytes) -> Dict[str, Any]:
         """Extracts color histograms, foliage indices, and lesion coordinates from raw image bytes"""
         try:
+            if not PIL_AVAILABLE or Image is None:
+                raise ImportError("PIL is not available in environment")
             img = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+
             # Downsample for fast, robust pixel-level metric analysis
             img_small = img.resize((128, 128))
             pixels = list(img_small.getdata())
