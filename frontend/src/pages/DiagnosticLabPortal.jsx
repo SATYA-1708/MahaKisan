@@ -98,6 +98,10 @@ export const DiagnosticLabPortal = ({ currentLang = 'en' }) => {
         ? 'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80'
         : sample.crop?.toLowerCase().includes('soybean')
         ? 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80'
+        : sample.crop?.toLowerCase().includes('onion')
+        ? 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80'
+        : sample.crop?.toLowerCase().includes('orange') || sample.crop?.toLowerCase().includes('citrus')
+        ? 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=800&q=80'
         : 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80'
     );
     

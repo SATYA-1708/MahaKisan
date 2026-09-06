@@ -79,6 +79,24 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       label: isEn ? 'Water-Soaked Lesions' : 'पाणी भिनलेले जखमेचे ठिपके',
       scientific: 'Phytophthora infestans',
       tag: isEn ? 'Oomycete Blight' : 'ओमाइसीट रोग'
+    },
+    {
+      id: 'onion_blotch',
+      title: isEn ? 'Onion Purple Blotch' : 'कांदा जांभळा करपा',
+      crop: 'Onion',
+      url: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80',
+      label: isEn ? 'Purplish Sunken Lesions' : 'जांभळे लंबगोलाकार डाग',
+      scientific: 'Alternaria porri',
+      tag: isEn ? 'Fungal Blotch' : 'बुरशीजन्य करपा'
+    },
+    {
+      id: 'citrus_canker',
+      title: isEn ? 'Citrus / Orange Canker' : 'संत्रा खैरा / कॅन्कर',
+      crop: 'Orange',
+      url: 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=800&q=80',
+      label: isEn ? 'Corky Raised Lesions' : 'फळावरील खडबडीत चट्टे',
+      scientific: 'Xanthomonas axonopodis',
+      tag: isEn ? 'Bacterial Canker' : 'जिवाणू खैरा'
     }
   ];
 
@@ -442,7 +460,7 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
               <span className="text-xs font-bold text-slate-600 block">
                 {isEn ? 'Or select verified test photos (1-Click):' : 'किंवा प्रमाणित चाचणी फोटो निवडा (१-क्लिक):'}
               </span>
-              <div className="grid grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                 {sampleImages.map(sample => {
                   const isSelected = selectedSampleImage === sample.url;
                   return (

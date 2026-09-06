@@ -1532,6 +1532,30 @@ export const ExpertTriagePage = ({ currentRole, currentLang = 'en' }) => {
                   expert_ground_truth: "Cercospora Leaf Spot (पानावरील करपा)",
                   override_reason: "High humidity chlorosis confused with rust pustules.",
                   curation_status: "PENDING_DATASET_REVIEW"
+                },
+                {
+                  case_id: "MH-PUN-10312",
+                  farmer_name: "Ganesh Jadhav (गणेश जाधव)",
+                  crop: "Tomato",
+                  district: "Pune",
+                  image_url: "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                  ai_prediction: "Tomato Late Blight (टोमॅटो करपा)",
+                  ai_confidence_pct: 89.0,
+                  expert_ground_truth: "Tomato Late Blight (टोमॅटो करपा)",
+                  override_reason: "Confirmed by multiplex PCR Ct 21.4 (A2 virulent strain).",
+                  curation_status: "APPROVED_FOR_DATASET"
+                },
+                {
+                  case_id: "MH-NSK-10405",
+                  farmer_name: "Balasaheb Shinde (बाळासाहेब शिंदे)",
+                  crop: "Onion",
+                  district: "Nashik",
+                  image_url: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+                  ai_prediction: "Onion Purple Blotch (जांभळा करपा)",
+                  ai_confidence_pct: 82.0,
+                  expert_ground_truth: "Onion Purple Blotch (जांभळा करपा)",
+                  override_reason: "Classic concentric purplish elliptical lesions verified on PDA culture.",
+                  curation_status: "PENDING_DATASET_REVIEW"
                 }
               ]).map(item => (
                 <div key={item.case_id} className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs">

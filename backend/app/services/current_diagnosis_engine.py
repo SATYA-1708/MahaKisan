@@ -1,6 +1,7 @@
 import io
 import time
 import colorsys
+from typing import Dict, Any, List, Optional, Tuple
 try:
     from PIL import Image
     PIL_AVAILABLE = True
@@ -9,7 +10,6 @@ except ImportError:
     PIL_AVAILABLE = False
 
 from app.models.schemas import (
-
     SymptomDetection, SeverityLevel, FarmProfile, UserRole
 )
 from app.services.ipm_knowledge_base import get_authoritative_ipm

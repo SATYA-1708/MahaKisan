@@ -73,7 +73,7 @@ class DataIngestionService:
         self._trap_cache["TRP-YVT-08"] = TrapData(
             trap_id="TRP-YVT-08",
             farm_id="farm_101",
-            trap_type="Pheromone Trap (Sex Attractant Lure)",
+            trap_type="Pheromone Trap (Sex Attractant Gossyplure)",
             target_pest="Pink Bollworm",
             count=14,
             etl_threshold=8,
@@ -83,13 +83,35 @@ class DataIngestionService:
         )
         self._trap_cache["TRP-NSK-02"] = TrapData(
             trap_id="TRP-NSK-02",
-            farm_id="farm_102",
+            farm_id="farm_105",
             trap_type="Sticky Yellow Card Trap",
             target_pest="Thrips / Whitefly",
             count=38,
             etl_threshold=30,
             is_etl_breached=True,
             photo_url="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+            date_recorded=now_iso
+        )
+        self._trap_cache["TRP-PUN-05"] = TrapData(
+            trap_id="TRP-PUN-05",
+            farm_id="farm_104",
+            trap_type="Delta Pheromone Trap (Tuta lure)",
+            target_pest="Tomato Leafminer (Tuta absoluta)",
+            count=22,
+            etl_threshold=15,
+            is_etl_breached=True,
+            photo_url="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80",
+            date_recorded=now_iso
+        )
+        self._trap_cache["TRP-NAG-04"] = TrapData(
+            trap_id="TRP-NAG-04",
+            farm_id="farm_106",
+            trap_type="Pheromone Trap (Citrus lure)",
+            target_pest="Citrus Leafminer",
+            count=18,
+            etl_threshold=12,
+            is_etl_breached=True,
+            photo_url="https://images.unsplash.com/photo-1582979512210-99b6a53386f9?auto=format&fit=crop&w=800&q=80",
             date_recorded=now_iso
         )
 
@@ -115,6 +137,30 @@ class DataIngestionService:
             soil_ec=1.3,
             solar_radiation_w_m2=540.0,
             battery_level_pct=88.0,
+            status="ACTIVE",
+            timestamp=now_iso
+        )
+        self._sensor_cache["IOT-NODE-703"] = SensorTelemetry(
+            sensor_id="IOT-NODE-703",
+            farm_id="farm_104",
+            soil_moisture_pct=38.2,
+            canopy_temperature_c=24.5,
+            leaf_wetness_duration_hrs=12.1,
+            soil_ec=1.0,
+            solar_radiation_w_m2=610.0,
+            battery_level_pct=95.0,
+            status="ACTIVE",
+            timestamp=now_iso
+        )
+        self._sensor_cache["IOT-NODE-704"] = SensorTelemetry(
+            sensor_id="IOT-NODE-704",
+            farm_id="farm_106",
+            soil_moisture_pct=31.0,
+            canopy_temperature_c=31.4,
+            leaf_wetness_duration_hrs=6.0,
+            soil_ec=1.2,
+            solar_radiation_w_m2=720.0,
+            battery_level_pct=90.0,
             status="ACTIVE",
             timestamp=now_iso
         )

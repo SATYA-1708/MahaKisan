@@ -139,7 +139,84 @@ class CaseManager:
         )
         self._profiles[p3.id] = p3
 
-        # Seed Urgent Cases in Krishi Sevak Queue
+        # 4. Pune Greenhouse Tomato Farm (Ganesh Jadhav)
+        p4 = FarmProfile(
+            id="farm_104",
+            farmer_name="Ganesh K. Jadhav (गणेश जाधव)",
+            farmer_id="MH-PUN-2026-003185",
+            contact="+91 94220 56789",
+            district="Pune",
+            taluka="Haveli",
+            village="Manjari",
+            latitude=18.5204,
+            longitude=73.9782,
+            farm_size_acres=2.0,
+            crop_name="Tomato",
+            crop_variety="Abhinav F1 Hybrid",
+            sowing_date="2026-07-05",
+            days_after_sowing=62,
+            crop_stage=CropStage.FLOWERING,
+            soil_type=SoilType.RED_LOAM,
+            soil_ph=6.8,
+            soil_drainage="Good",
+            irrigation_type="Drip",
+            created_at=now_iso
+        )
+        self._profiles[p4.id] = p4
+
+        # 5. Nashik Onion Farm (Balasaheb Shinde)
+        p5 = FarmProfile(
+            id="farm_105",
+            farmer_name="Balasaheb D. Shinde (बाळासाहेब शिंदे)",
+            farmer_id="MH-NSK-2026-004512",
+            contact="+91 98231 78901",
+            district="Nashik",
+            taluka="Niphad",
+            village="Pimpalgaon Baswant",
+            latitude=20.1738,
+            longitude=73.9875,
+            farm_size_acres=3.0,
+            crop_name="Onion",
+            crop_variety="N-2-4-1 Red Onion",
+            sowing_date="2026-07-15",
+            days_after_sowing=52,
+            crop_stage=CropStage.VEGETATIVE,
+            soil_type=SoilType.MEDIUM_BLACK,
+            soil_ph=7.2,
+            soil_drainage="Good",
+            irrigation_type="Sprinkler",
+            created_at=now_iso
+        )
+        self._profiles[p5.id] = p5
+
+        # 6. Nagpur Citrus/Orange Orchard (Pravin Choudhary)
+        p6 = FarmProfile(
+            id="farm_106",
+            farmer_name="Pravin D. Choudhary (प्रवीण चौधरी)",
+            farmer_id="MH-NAG-2026-005623",
+            contact="+91 99701 45678",
+            district="Nagpur",
+            taluka="Katol",
+            village="Kondhali",
+            latitude=21.2644,
+            longitude=78.5837,
+            farm_size_acres=5.0,
+            crop_name="Orange",
+            crop_variety="Nagpur Mandarin",
+            sowing_date="2023-08-10",
+            days_after_sowing=1120,
+            crop_stage=CropStage.POD_FRUIT_DEV,
+            soil_type=SoilType.MEDIUM_BLACK,
+            soil_ph=7.6,
+            soil_drainage="Good",
+            irrigation_type="Drip",
+            created_at=now_iso
+        )
+        self._profiles[p6.id] = p6
+
+        # --- SEED CASES ---
+
+        # Case 1: Cotton Pink Bollworm (Critical Priority, Yavatmal)
         diag1 = current_diagnosis_engine.analyze_symptom_image(
             image_name="cotton_pbw.jpg",
             profile=p1
@@ -151,7 +228,6 @@ class CaseManager:
             {"entity": "Spodoptera / Tobacco Caterpillar (लष्करी अळी)", "confidence_pct": 10.0, "scientific_name": "Spodoptera litura"}
         ]
         risk1 = future_risk_engine.forecast_crop_risk("Yavatmal", "Cotton", p1)
-        prio1, pscore1 = compute_case_priority(diag1, risk1)
 
         case1 = CaseRecord(
             case_id="MH-YAV-10231",
@@ -190,6 +266,7 @@ class CaseManager:
         )
         self._cases[case1.case_id] = case1
 
+        # Case 2: Soybean Asian Rust (High Priority, Yavatmal)
         diag2 = current_diagnosis_engine.analyze_symptom_image(
             image_name="soybean_rust.jpg",
             profile=p2
@@ -201,7 +278,6 @@ class CaseManager:
             {"entity": "Anthracnose Pod Blight (अँथ्रॅक्नोज)", "confidence_pct": 14.0, "scientific_name": "Colletotrichum truncatum"}
         ]
         risk2 = future_risk_engine.forecast_crop_risk("Yavatmal", "Soybean", p2)
-        prio2, pscore2 = compute_case_priority(diag2, risk2)
 
         case2 = CaseRecord(
             case_id="MH-YAV-10228",
@@ -239,11 +315,80 @@ class CaseManager:
         )
         self._cases[case2.case_id] = case2
 
-        # Seed Follow-Up Due Case
+        # Case 3: Tomato Late Blight (High Priority, Pune Greenhouse)
+        diag4 = current_diagnosis_engine.analyze_symptom_image(
+            image_name="tomato_blight.jpg",
+            profile=p4
+        )
+        diag4.detected_entity = "Tomato Late Blight (टोमॅटो करपा)"
+        diag4.scientific_name = "Phytophthora infestans"
+        diag4.confidence_score = 0.89
+        risk4 = future_risk_engine.forecast_crop_risk("Pune", "Tomato", p4)
+
+        case4 = CaseRecord(
+            case_id="MH-PUN-10312",
+            farmer_profile=p4,
+            image_url="https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+            diagnosis=diag4,
+            future_risk=risk4,
+            status="PENDING_FIELD_VERIFICATION",
+            created_at=(datetime.now() - timedelta(hours=4)).isoformat(),
+            priority="HIGH",
+            priority_score=85.0,
+            distance_km=3.1,
+            assigned_krishi_sevak="Sunil K. Patil (Haveli Beat, Pune)",
+            triage_reason="Aggressive oomycete spreading across greenhouse canopy (94% humidity).",
+            field_inspection=FieldInspectionRecord(
+                status="COMPLETED",
+                officer_id="ksevak_205",
+                officer_name="Sunil K. Patil",
+                completed_at=(datetime.now() - timedelta(hours=2)).isoformat(),
+                distance_km=3.1,
+                affected_plants_pct=35,
+                officer_observation="Rapid dark water-soaked lesions expanding on lower foliage and petioles with white downy growth on abaxial margins.",
+                officer_assessment="VERIFIED",
+                inspection_notes="Immediate systemic fungicide intervention mandatory.",
+                field_photos=[
+                    "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80"
+                ]
+            ),
+            follow_up_scheduled_at=(datetime.now() + timedelta(days=4)).strftime("%Y-%m-%d"),
+            recovery_status="PENDING_EXPERT_TRIAGE"
+        )
+        self._cases[case4.case_id] = case4
+
+        # Case 4: Onion Purple Blotch (Medium Priority, Nashik)
+        diag5 = current_diagnosis_engine.analyze_symptom_image(
+            image_name="onion_blotch.jpg",
+            profile=p5
+        )
+        diag5.detected_entity = "Onion Purple Blotch (जांभळा करपा)"
+        diag5.scientific_name = "Alternaria porri"
+        diag5.confidence_score = 0.82
+        risk5 = future_risk_engine.forecast_crop_risk("Nashik", "Onion", p5)
+
+        case5 = CaseRecord(
+            case_id="MH-NSK-10405",
+            farmer_profile=p5,
+            image_url="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+            diagnosis=diag5,
+            future_risk=risk5,
+            status="ASSIGNED",
+            created_at=(datetime.now() - timedelta(hours=5)).isoformat(),
+            priority="MEDIUM",
+            priority_score=68.0,
+            distance_km=5.2,
+            assigned_krishi_sevak="Ramesh G. Kulkarni (Niphad Beat, Nashik)",
+            triage_reason="Concentric purplish lesions on seed stalks following seasonal drizzle."
+        )
+        self._cases[case5.case_id] = case5
+
+        # Case 5: Seed Follow-Up Due Case (Cotton Treatment Applied, Day 7 Recovery)
         case3 = CaseRecord(
             case_id="MH-YAV-10195",
             farmer_profile=p3,
-            image_url="https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+            image_url="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80",
             diagnosis=diag1,
             future_risk=risk1,
             status="TREATMENT_APPLIED",
@@ -261,9 +406,8 @@ class CaseManager:
                 officer_assessment="VERIFIED",
                 officer_observation="Foliage chlorosis and water-soaked lesions observed on lower leaves.",
                 field_photos=[
-                    "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
+                    "https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80"
                 ]
             ),
             treatment_logs=[{
@@ -277,7 +421,9 @@ class CaseManager:
         )
         self._cases[case3.case_id] = case3
 
-        # Seed Diagnostic Laboratory Samples for Scientific Confirmation Layer (Role 4)
+        # --- SEED DIAGNOSTIC LABORATORY SAMPLES ---
+
+        # Sample 1: Yavatmal Cotton PBW Sample (Awaiting Intake)
         spl1 = LabSampleRecord(
             sample_id="SMP-000891",
             referral_id="LR-MH-2026-000183",
@@ -297,6 +443,13 @@ class CaseManager:
             status="AWAITING_INTAKE",
             collected_by="Anil S. Deshmukh (Krishi Sevak, ID: 4832)",
             collection_time="05 Sept 2026 — 10:42 AM",
+            case_image_url="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
+            field_photos=[
+                "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
+            ],
             chain_of_custody=[
                 {
                     "timestamp": "10:42 AM",
@@ -335,6 +488,7 @@ class CaseManager:
         )
         self._lab_samples[spl1.sample_id] = spl1
 
+        # Sample 2: Yavatmal Soybean Rust Sample (Testing In Progress)
         spl2 = LabSampleRecord(
             sample_id="SMP-000892",
             referral_id="LR-MH-2026-000184",
@@ -354,6 +508,12 @@ class CaseManager:
             status="TESTING_IN_PROGRESS",
             collected_by="Anil S. Deshmukh (Krishi Sevak, ID: 4832)",
             collection_time="04 Sept 2026 — 02:15 PM",
+            case_image_url="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+            field_photos=[
+                "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80"
+            ],
             intake_condition={
                 "packaging": "INTACT",
                 "label": "CORRECT",
@@ -410,10 +570,11 @@ class CaseManager:
         )
         self._lab_samples[spl2.sample_id] = spl2
 
+        # Sample 3: Pune Tomato Late Blight Sample (Certified Report Issued)
         spl3 = LabSampleRecord(
             sample_id="SMP-000893",
             referral_id="LR-MH-2026-000185",
-            case_id="MH-YAV-10195",
+            case_id="MH-PUN-10312",
             farmer_name="Ganesh K. Jadhav (गणेश जाधव)",
             district="Pune",
             taluka="Haveli",
@@ -429,6 +590,11 @@ class CaseManager:
             status="REPORT_ISSUED",
             collected_by="Sunil Patil (Krishi Sevak, ID: 4890)",
             collection_time="03 Sept 2026 — 09:30 AM",
+            case_image_url="https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+            field_photos=[
+                "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80"
+            ],
             intake_condition={
                 "packaging": "INTACT",
                 "label": "CORRECT",
@@ -471,6 +637,7 @@ class CaseManager:
                     "test_reference": "PCR-MH-2026-904",
                     "technician_id": "MOL-TECH-101",
                     "observation": "High copy-number amplification detected (Ct 21.4). Verified virulent A2 mating type.",
+                    "micrograph_url": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
                     "completed_at": "2026-09-04T13:00:00"
                 }
             ],
@@ -489,6 +656,70 @@ class CaseManager:
             report_version=1
         )
         self._lab_samples[spl3.sample_id] = spl3
+
+        # Sample 4: Nashik Onion Purple Blotch Sample (Culture Testing)
+        spl4 = LabSampleRecord(
+            sample_id="SMP-000894",
+            referral_id="LR-MH-2026-000186",
+            case_id="MH-NSK-10405",
+            farmer_name="Balasaheb D. Shinde (बाळासाहेब शिंदे)",
+            district="Nashik",
+            taluka="Niphad",
+            village="Pimpalgaon Baswant",
+            crop="Onion",
+            plant_part="Seed Stalks & Foliage",
+            suspected_pathogen="Onion Purple Blotch (Alternaria porri)",
+            referral_reason="Widespread purplish elliptical lesions across export onion block.",
+            specimen_type="Foliar Lesion Biopsy Core",
+            priority="MEDIUM",
+            dispatch_date="2026-09-05",
+            lab_name="Nashik Agro-Pathology Diagnostic Center (MPKV)",
+            status="TESTING_IN_PROGRESS",
+            collected_by="Ramesh G. Kulkarni (Krishi Sevak, ID: 4912)",
+            collection_time="05 Sept 2026 — 08:30 AM",
+            case_image_url="https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+            field_photos=[
+                "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80"
+            ],
+            intake_condition={
+                "packaging": "INTACT",
+                "label": "CORRECT",
+                "quantity": "SUFFICIENT",
+                "contamination": "NONE",
+                "condition": "ACCEPTABLE"
+            },
+            chain_of_custody=[
+                {
+                    "timestamp": "08:30 AM",
+                    "actor": "Ramesh G. Kulkarni",
+                    "role": "KRISHI_SEVAK",
+                    "location": "Pimpalgaon Farm",
+                    "action": "Sample Harvested & Packaged",
+                    "remarks": "8 foliar cuttings sealed."
+                },
+                {
+                    "timestamp": "11:15 AM",
+                    "actor": "Dr. Snehal Kulkarni",
+                    "role": "DIAGNOSTIC_LAB",
+                    "location": "Nashik Pathology Lab",
+                    "action": "Inoculation onto PDA Agar Plates",
+                    "remarks": "Incubated at 25°C under 12h photoperiod."
+                }
+            ],
+            tests_performed=[
+                {
+                    "test_type": "Fungal Culture & Morphology",
+                    "target_organism": "Alternaria porri conidia",
+                    "magnification": "400x Brightfield",
+                    "result": "POSITIVE",
+                    "technician_id": "TECH-204",
+                    "observation": "Muriform, beaked conidia typical of Alternaria porri isolated on PDA.",
+                    "micrograph_url": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
+                    "completed_at": "2026-09-05T14:00:00"
+                }
+            ]
+        )
+        self._lab_samples[spl4.sample_id] = spl4
 
     def get_profile(self, farm_id: str) -> Optional[FarmProfile]:
         return self._profiles.get(farm_id)
@@ -1238,6 +1469,97 @@ class CaseManager:
     def update_profile(self, profile: FarmProfile, user_id: str = "farmer_101") -> FarmProfile:
         self._profiles[profile.id] = profile
         return profile
+
+    def get_active_learning_pool(self) -> List[Dict[str, Any]]:
+        pool = []
+        for case in self._cases.values():
+            if hasattr(case, "active_learning") and case.active_learning:
+                pool.append({
+                    "case_id": case.case_id,
+                    "farmer_name": case.farmer_profile.farmer_name,
+                    "crop": case.farmer_profile.crop_name,
+                    "district": case.farmer_profile.district,
+                    "image_url": case.image_url,
+                    "ai_prediction": case.diagnosis.detected_entity,
+                    "ai_confidence_pct": round(case.diagnosis.confidence_score * 100, 1),
+                    "expert_ground_truth": case.active_learning.get("expert_ground_truth"),
+                    "override_reason": case.active_learning.get("override_reason"),
+                    "curation_status": case.active_learning.get("curation_status"),
+                    "tagged_at": case.active_learning.get("tagged_at")
+                })
+        
+        # If pool is empty, provide authentic candidates across Maharashtra crops
+        if not pool:
+            pool = [
+                {
+                    "case_id": "MH-YAV-10231",
+                    "farmer_name": "Ramesh Patil (रमेश पाटील)",
+                    "crop": "Cotton",
+                    "district": "Yavatmal",
+                    "image_url": "https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80",
+                    "ai_prediction": "Cotton Pink Bollworm (गुलाबी बोंडअळी)",
+                    "ai_confidence_pct": 72.0,
+                    "expert_ground_truth": "American Bollworm (अमेरिकन बोंडअळी)",
+                    "override_reason": "Morphological larval banding and exit frass inconsistent with AI prediction.",
+                    "curation_status": "APPROVED_FOR_DATASET",
+                    "tagged_at": datetime.now().isoformat()
+                },
+                {
+                    "case_id": "MH-YAV-10228",
+                    "farmer_name": "Suresh Rathod (सुरेश राठोड)",
+                    "crop": "Soybean",
+                    "district": "Yavatmal",
+                    "image_url": "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80",
+                    "ai_prediction": "Soybean Rust (तांबेरा रोग)",
+                    "ai_confidence_pct": 58.0,
+                    "expert_ground_truth": "Cercospora Leaf Spot (पानावरील करपा)",
+                    "override_reason": "High humidity chlorosis confused with rust pustules under standard optics.",
+                    "curation_status": "PENDING_DATASET_REVIEW",
+                    "tagged_at": datetime.now().isoformat()
+                },
+                {
+                    "case_id": "MH-PUN-10312",
+                    "farmer_name": "Ganesh Jadhav (गणेश जाधव)",
+                    "crop": "Tomato",
+                    "district": "Pune",
+                    "image_url": "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80",
+                    "ai_prediction": "Tomato Late Blight (टोमॅटो करपा)",
+                    "ai_confidence_pct": 89.0,
+                    "expert_ground_truth": "Tomato Late Blight (टोमॅटो करपा)",
+                    "override_reason": "Confirmed by multiplex PCR Ct 21.4 (A2 virulent strain).",
+                    "curation_status": "APPROVED_FOR_DATASET",
+                    "tagged_at": datetime.now().isoformat()
+                },
+                {
+                    "case_id": "MH-NSK-10405",
+                    "farmer_name": "Balasaheb Shinde (बाळासाहेब शिंदे)",
+                    "crop": "Onion",
+                    "district": "Nashik",
+                    "image_url": "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80",
+                    "ai_prediction": "Onion Purple Blotch (जांभळा करपा)",
+                    "ai_confidence_pct": 82.0,
+                    "expert_ground_truth": "Onion Purple Blotch (जांभळा करपा)",
+                    "override_reason": "Classic concentric purplish elliptical lesions verified on PDA culture.",
+                    "curation_status": "PENDING_DATASET_REVIEW",
+                    "tagged_at": datetime.now().isoformat()
+                }
+            ]
+        return pool
+
+    def curate_active_learning_candidate(self, case_id: str, new_status: str, expert_id: str = "expert_301", expert_name: str = "Dr. Anant Deshpande") -> Dict[str, Any]:
+        case = self._cases.get(case_id)
+        if case and hasattr(case, "active_learning") and case.active_learning:
+            case.active_learning["curation_status"] = new_status
+            audit_logger.record(
+                user_id=expert_id,
+                user_name=expert_name,
+                user_role=UserRole.AGRI_EXPERT,
+                action="ACTIVE_LEARNING_CURATED",
+                entity_type="ACTIVE_LEARNING",
+                entity_id=case_id,
+                details={"status": new_status}
+            )
+        return {"case_id": case_id, "status": new_status}
 
 case_manager = CaseManager()
 
