@@ -51,6 +51,79 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
   const [day0Severity, setDay0Severity] = useState(32);
   const [day7Severity, setDay7Severity] = useState(14);
 
+  const getFarmerRecoveryData = () => {
+    const entity = (diagnosisResult?.detected_entity || selectedCrop || profile?.crop_name || '').toLowerCase();
+    if (entity.includes('soybean') || entity.includes('rust') || entity.includes('तांबेरा')) {
+      return {
+        cropName: isEn ? 'Soybean' : 'सोयाबीन',
+        diseaseName: isEn ? 'Soybean Leaf Rust (Phakopsora pachyrhizi)' : 'सोयाबीन तांबेरा रोग (Phakopsora pachyrhizi)',
+        day0Photo: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=800&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80',
+        day0Desc: isEn ? 'Dense foliar rust pustules and chlorotic leaf spots.' : 'पानांवर दाट तांबेरा फोड आणि पिवळे चट्टे.',
+        day7Desc: isEn ? 'Spore sporulation halted with fresh green canopy flush.' : 'बीजाणू प्रसार थांबला आणि नवीन हिरवी पाने फुटली.',
+        day0Sev: 34,
+        day7Sev: 12,
+        reductionPct: 65,
+        saving: '₹38,000'
+      };
+    }
+    if (entity.includes('tomato') || entity.includes('late blight') || entity.includes('करपा')) {
+      return {
+        cropName: isEn ? 'Tomato' : 'टोमॅटो',
+        diseaseName: isEn ? 'Tomato Late Blight (Phytophthora infestans)' : 'टोमॅटो करपा रोग (Phytophthora infestans)',
+        day0Photo: 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=800&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=800&q=80',
+        day0Desc: isEn ? 'Water-soaked expanding necrotic lesions on foliage.' : 'पानांवर पाणी भिनलेले पसरणारे करपा डाग.',
+        day7Desc: isEn ? 'Lesions completely dried and arrested; vigorous vine development.' : 'डाग पूर्णपणे सुकले व थांबले; जोमदार वेलीची वाढ.',
+        day0Sev: 38,
+        day7Sev: 14,
+        reductionPct: 63,
+        saving: '₹45,000'
+      };
+    }
+    if (entity.includes('onion') || entity.includes('purple blotch') || entity.includes('कांदा')) {
+      return {
+        cropName: isEn ? 'Onion' : 'कांदा',
+        diseaseName: isEn ? 'Onion Purple Blotch (Alternaria porri)' : 'कांदा जांभळा करपा (Alternaria porri)',
+        day0Photo: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=800&q=80',
+        day0Desc: isEn ? 'Sunken concentric purple lesions on onion stalks.' : 'कांद्याच्या पातीवर जांभळे खोलगट डाग.',
+        day7Desc: isEn ? 'Stalk tissues healed with robust green foliar stand.' : 'पातीची ऊती बरी झाली व मजबूत हिरवी वाढ.',
+        day0Sev: 26,
+        day7Sev: 8,
+        reductionPct: 69,
+        saving: '₹32,000'
+      };
+    }
+    if (entity.includes('orange') || entity.includes('citrus') || entity.includes('canker') || entity.includes('कॅन्कर')) {
+      return {
+        cropName: isEn ? 'Orange / Citrus' : 'संत्रा / मोसंबी',
+        diseaseName: isEn ? 'Citrus Canker (Xanthomonas axonopodis)' : 'संत्रा खैरा / कॅन्कर (Xanthomonas axonopodis)',
+        day0Photo: 'https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=800&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=800&q=80',
+        day0Desc: isEn ? 'Corky eruptive lesions and yellow haloes on fruit.' : 'फळ व पानांवर खडबडीत चट्टे व पिवळे वलय.',
+        day7Desc: isEn ? 'Bacterial exudate arrested; healthy fruit expansion.' : 'जिवाणू प्रादुर्भाव थांबला; निरोगी फळ वाढ.',
+        day0Sev: 30,
+        day7Sev: 10,
+        reductionPct: 67,
+        saving: '₹55,000'
+      };
+    }
+    // Default Cotton Pink Bollworm
+    return {
+      cropName: isEn ? 'Cotton' : 'कापूस',
+      diseaseName: isEn ? 'Cotton Pink Bollworm (Pectinophora gossypiella)' : 'कापूस गुलाबी बोंडअळी (Pectinophora gossypiella)',
+      day0Photo: 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80',
+      day7Photo: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80',
+      day0Desc: isEn ? 'Larval entrance boreholes & frass on cotton bolls.' : 'कापसाच्या बोंडावर अळीच्या प्रवेशाची छिद्रे व विष्ठा.',
+      day7Desc: isEn ? 'Symptom arrested with healthy fresh boll opening & lint flush.' : 'निरोगी नवीन बोंड वाढीसह लक्षणे थांबली व शुभ्र कापूस बहरला.',
+      day0Sev: 32,
+      day7Sev: 14,
+      reductionPct: 56,
+      saving: '₹42,500'
+    };
+  };
+
   // Sample Images Library
   const sampleImages = [
     {
@@ -945,22 +1018,24 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
       {/* ========================================================================= */}
       {/* TAB 5: POST-TREATMENT RECOVERY (DAY 0 VS DAY 7)                           */}
       {/* ========================================================================= */}
-      {activeTab === 'recovery' && (
+      {activeTab === 'recovery' && (() => {
+        const recData = getFarmerRecoveryData();
+        return (
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-5 text-sm">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
             <div>
               <h3 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
                 <Award className="w-5 h-5 text-emerald-600" />
-                {isEn ? 'Post-Treatment Recovery Verification (Day 0 vs Day 7)' : 'उपचारानंतर सुधारणा पडताळणी (दिवस ० विरुद्ध दिवस ७)'}
+                {isEn ? `Post-Treatment Recovery Verification — ${recData.cropName}` : `उपचारानंतर सुधारणा पडताळणी — ${recData.cropName}`}
               </h3>
               <p className="text-xs text-slate-500">
-                {isEn ? 'Visual proof of treatment efficacy and crop symptom arrest' : 'उपचार परिणामकारकता व पीक लक्षणे थांबल्याचा दृश्य पुरावा'}
+                {recData.diseaseName} • {isEn ? 'Visual proof of treatment efficacy and crop symptom arrest' : 'उपचार परिणामकारकता व पीक लक्षणे थांबल्याचा दृश्य पुरावा'}
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 bg-emerald-100 text-emerald-900 px-3.5 py-1.5 rounded-full font-bold text-xs">
-            <span>{isEn ? '56% Symptom Reduction • ₹42,500 Yield Saved' : '५६% लक्षणे घट • ₹४२,५०० उत्पादन बचत'}</span>
+            <span>{isEn ? `${recData.reductionPct}% Symptom Reduction • ${recData.saving} Yield Saved` : `${recData.reductionPct}% लक्षणे घट • ${recData.saving} उत्पादन बचत`}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -968,11 +1043,11 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
               <span className="font-bold text-slate-900 block">{isEn ? 'Day 0: Initial Infestation (Pre-Spray)' : 'दिवस ०: सुरुवातीचा प्रादुर्भाव (फवारणीपूर्वी)'}</span>
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=800&q=80"
+                  src={recData.day0Photo}
                   alt={isEn ? 'Day 0' : 'दिवस ०'}
                   className="w-full h-64 object-cover rounded-2xl border-2 border-rose-300"
                 />
-                <p className="text-slate-500 text-[11px]">{isEn ? 'Larval entrance boreholes on cotton bolls.' : 'कापसाच्या बोंडावर अळीच्या प्रवेशाची छिद्रे.'}</p>
+                <p className="text-slate-500 text-[11px] mt-1">{recData.day0Desc}</p>
               </div>
             </div>
 
@@ -980,11 +1055,11 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
               <span className="font-bold text-slate-900 block">{isEn ? 'Day 7: Post-Treatment Healing' : 'दिवस ७: उपचारानंतर भरून येणे'}</span>
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80"
+                  src={recData.day7Photo}
                   alt={isEn ? 'Day 7' : 'दिवस ७'}
                   className="w-full h-64 object-cover rounded-2xl border-2 border-emerald-400"
                 />
-                <p className="text-slate-500 text-[11px]">{isEn ? 'Symptom arrested with healthy fresh boll growth.' : 'निरोगी नवीन बोंड वाढीसह लक्षणे थांबली.'}</p>
+                <p className="text-slate-500 text-[11px] mt-1">{recData.day7Desc}</p>
               </div>
             </div>
           </div>
@@ -993,19 +1068,20 @@ export const FarmerPortal = ({ currentLang = 'en' }) => {
           <div className="pt-4 border-t border-slate-100">
             <div className="grid grid-cols-2 gap-2 text-xs text-slate-600">
               <div>
-                <strong>{isEn ? 'Day 0 Severity:' : 'दिवस ० तीव्रता:'}</strong> 32%<br/>
-                <strong>{isEn ? 'Day 7 Severity:' : 'दिवस ७ तीव्रता:'}</strong> 14%<br/>
-                <strong>{isEn ? 'Improvement:' : 'सुधारणा:'}</strong> 56%
+                <strong>{isEn ? 'Day 0 Severity:' : 'दिवस ० तीव्रता:'}</strong> {recData.day0Sev}%<br/>
+                <strong>{isEn ? 'Day 7 Severity:' : 'दिवस ७ तीव्रता:'}</strong> {recData.day7Sev}%<br/>
+                <strong>{isEn ? 'Improvement:' : 'सुधारणा:'}</strong> {recData.reductionPct}%
               </div>
               <div>
                 <strong>{isEn ? 'Treatment Outcome:' : 'उपचार निकाल:'}</strong> {isEn ? 'IMPROVING' : 'सुधारत आहे'}<br/>
                 <strong>{isEn ? 'Recovery Status:' : 'सुधारणा स्थिती:'}</strong> RECOVERY_CONFIRMED_HEALING<br/>
-                <strong>{isEn ? 'Yield Impact:' : 'उत्पादन प्रभाव:'}</strong> INR 42,500 {isEn ? 'saved' : 'बचत'}
+                <strong>{isEn ? 'Yield Impact:' : 'उत्पादन प्रभाव:'}</strong> INR {recData.saving} {isEn ? 'saved' : 'बचत'}
               </div>
             </div>
           </div>
         </div>
-      )}
+        );
+      })()}
 
       {/* ========================================================================= */}
       {/* TAB 6: GOVT SCHEMES, MANDI RATES & 24x7 HELPLINE                           */}

@@ -80,20 +80,86 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
   // Step 15 & 16: Advisory Dispatched
   const [advisoryDispatched, setAdvisoryDispatched] = useState(false);
 
-  // Step 17 & 18: Follow-Up Management & Deterioration Simulator
-  const [evaluatingCase, setEvaluatingCase] = useState(null);
-  const [day0Severity, setDay0Severity] = useState(25);
-  const [day7Severity, setDay7Severity] = useState(12); // Default to positive recovery (25% -> 12%)
-  const [followUpPhotoDay0, setFollowUpPhotoDay0] = useState(null);
-  const [followUpPhotoDay7, setFollowUpPhotoDay7] = useState(null);
-  const [isAnalyzingDay7Photo, setIsAnalyzingDay7Photo] = useState(false);
-  
-  // Revised Prescription for Deteriorating Cases (Second-Line Chemistry)
-  const [isPrescribingSecondLine, setIsPrescribingSecondLine] = useState(false);
-  const [secondLineMolecule, setSecondLineMolecule] = useState('Chlorantraniliprole 18.5% SC (Coragen) @ 6 ml / 15L pump');
-  const [secondLineNotes, setSecondLineNotes] = useState(isEn ? 'Rotated to Anthranilic Diamide chemistry to counter suspected organophosphate/avermectin tolerance.' : 'संशयित ऑर्गनोफॉस्फेट/एव्हर्मेक्टिन सहनशीलतेवर मात करण्यासाठी अँथ्रानिलिक डायमाइड रसायन बदलले.');
+  // Step 17 & 18: Per-Case Follow-Up Management & Deterioration Simulator State
+  const [caseFollowUpState, setCaseFollowUpState] = useState({});
 
-  const isDeteriorating = day7Severity > day0Severity;
+  const getCaseFollowUp = (c) => {
+    const crop = (c?.farmer_profile?.crop_name || c?.crop || '').toLowerCase();
+    const entity = (c?.diagnosis?.detected_entity || '').toLowerCase();
+
+    // Crop-specific authentic Day 0 / Day 7 image pairs, severities, and CIBRC treatments
+    let defaultData = {
+      day0Photo: 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=600&q=80',
+      day7Photo: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=600&q=80',
+      day0Severity: 28,
+      day7Severity: 11,
+      treatmentName: 'Emamectin Benzoate 5% SG @ 7.5 gm / 15L pump',
+      secondLineMolecule: 'Chlorantraniliprole 18.5% SC (Coragen) @ 6 ml / 15L pump',
+      secondLineNotes: isEn ? 'Rotated to Anthranilic Diamide chemistry to counter suspected OP/pyrethroid tolerance.' : 'सहनशीलतेवर मात करण्यासाठी अँथ्रानिलिक डायमाइड रसायन बदलले.',
+      day0Desc: isEn ? 'Boreholes & frass on bolls' : 'बोंडांवर छिद्रे व अळीची विष्ठा',
+      day7Desc: isEn ? 'Clean boll development, zero fresh frass' : 'स्वच्छ बोंड विकास, नवीन विष्ठा नाही'
+    };
+
+    if (crop.includes('soybean') || entity.includes('rust') || entity.includes('तांबेरा')) {
+      defaultData = {
+        day0Photo: 'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&w=600&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80',
+        day0Severity: 34,
+        day7Severity: 12,
+        treatmentName: 'Hexaconazole 5% SC @ 15 ml / 15L pump',
+        secondLineMolecule: 'Tebuconazole 25.9% EC @ 15 ml / 15L pump + Azoxystrobin',
+        secondLineNotes: isEn ? 'Dual-action Strobilurin + Triazole tank mix for aggressive spore arrest.' : 'तीव्र बीजाणू रोखण्यासाठी स्ट्रोबिल्यूरिन + ट्रायझोल मिश्रण.',
+        day0Desc: isEn ? 'Severe foliar rust pustules on abaxial leaf' : 'पानांवर तीव्र तांबेरा फोड',
+        day7Desc: isEn ? 'Clean recovered green foliage, sporulation stopped' : 'स्वच्छ निरोगी हिरवी पाने, बीजाणू थांबले'
+      };
+    } else if (crop.includes('tomato') || entity.includes('late blight') || entity.includes('करपा')) {
+      defaultData = {
+        day0Photo: 'https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&w=600&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80',
+        day0Severity: 35,
+        day7Severity: 14,
+        treatmentName: 'Mancozeb 75% WP @ 35 gm / 15L pump',
+        secondLineMolecule: 'Dimethomorph 50% WP (15 gm) + Cymoxanil 8% + Mancozeb 64%',
+        secondLineNotes: isEn ? 'Systemic oomycide penetrant targeting vascular mycelium.' : 'अंतर्प्रवाही ओमाइसीड कवकनाशक.',
+        day0Desc: isEn ? 'Water-soaked necrotic lesions with white down' : 'पाण्यासारखे करपा डाग व पांढरी बुरशी',
+        day7Desc: isEn ? 'Lesions dried, vigorous healthy green canopy' : 'डाग सुकले, जोमदार निरोगी हिरवा विस्तार'
+      };
+    } else if (crop.includes('onion') || entity.includes('purple blotch') || entity.includes('कांदा')) {
+      defaultData = {
+        day0Photo: 'https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=600&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=600&q=80',
+        day0Severity: 24,
+        day7Severity: 8,
+        treatmentName: 'Tebuconazole 25.9% EC @ 15 ml / 15L pump',
+        secondLineMolecule: 'Difenoconazole 25% EC @ 10 ml / 15L pump + Non-ionic Spreader',
+        secondLineNotes: isEn ? 'High-potency systemic conidial inhibitor.' : 'उच्च क्षमतेचे अंतर्प्रवाही कवकनाशक.',
+        day0Desc: isEn ? 'Concentric sunken purple blotches on stalks' : 'देठांवर जांभळे खोलगट डाग',
+        day7Desc: isEn ? 'Stalks cured and fortified, zero new blotches' : 'पाती बरी झाली, नवीन डाग नाहीत'
+      };
+    } else if (crop.includes('orange') || crop.includes('citrus') || entity.includes('canker') || entity.includes('कॅन्कर')) {
+      defaultData = {
+        day0Photo: 'https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=600&q=80',
+        day7Photo: 'https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=600&q=80',
+        day0Severity: 30,
+        day7Severity: 10,
+        treatmentName: 'Streptocycline 90% (1g) + COC 50% WP (25g) / 15L',
+        secondLineMolecule: 'Kasugamycin 3% SL @ 30 ml / 15L pump + Copper Hydroxide',
+        secondLineNotes: isEn ? 'Bacteriostatic antibiotic rotation against Xanthomonas.' : 'झांथोमोनॉस विरुद्ध जिवाणूनाशक बदल.',
+        day0Desc: isEn ? 'Raised eruptive canker pustules with yellow haloes' : 'खवलेदार कॅन्कर फोड व पिवळे वलय',
+        day7Desc: isEn ? 'Lesions cicatriced, glossy healthy citrus fruit flush' : 'फोड थांबले, चमकदार निरोगी संत्री बहर'
+      };
+    }
+
+    const custom = caseFollowUpState[c.case_id] || {};
+    return { ...defaultData, ...custom };
+  };
+
+  const updateCaseFollowUp = (caseId, updates) => {
+    setCaseFollowUpState(prev => ({
+      ...prev,
+      [caseId]: { ...(prev[caseId] || {}), ...updates }
+    }));
+  };
 
   // Full Authoritative CIBRC IPM Database for dynamic rendering in Krishi Sevak workbench
   const CIBRC_IPM_MAP = {
@@ -323,27 +389,29 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
 
   const handleEvaluateFollowUp = async (caseItem) => {
     try {
+      const fuData = getCaseFollowUp(caseItem);
+      const isDet = fuData.day7Severity > fuData.day0Severity;
       const formData = new FormData();
-      formData.append('day0_severity', day0Severity);
-      formData.append('day7_severity', day7Severity);
+      formData.append('day0_severity', fuData.day0Severity);
+      formData.append('day7_severity', fuData.day7Severity);
 
       const updated = await api.checkFollowUpOutcome(caseItem.case_id, formData);
       
       // Update local state immediately so UI updates in real-time
-      caseItem.status = isDeteriorating ? 'EXPERT_REVIEW_REQUIRED' : 'VERIFIED_RESOLVED';
-      caseItem.recovery_status = isDeteriorating ? 'DETERIORATION_ALERT_ESCALATED' : 'RECOVERY_CONFIRMED_HEALING';
+      caseItem.status = isDet ? 'EXPERT_REVIEW_REQUIRED' : 'VERIFIED_RESOLVED';
+      caseItem.recovery_status = isDet ? 'DETERIORATION_ALERT_ESCALATED' : 'RECOVERY_CONFIRMED_HEALING';
       caseItem.follow_up_evaluated = true;
-      caseItem.follow_up_outcome = isDeteriorating ? 'DETERIORATING_ALERT' : 'IMPROVING';
+      caseItem.follow_up_outcome = isDet ? 'DETERIORATING_ALERT' : 'IMPROVING';
       setCases([...cases]);
 
-      if (isDeteriorating) {
+      if (isDet) {
         alert(isEn 
-          ? `🔴 TREATMENT OUTCOME ALERT TRIGGERED!\n• Severity increased from ${day0Severity}% to ${day7Severity}% after 7 days.\n• Case #${caseItem.case_id} has been automatically escalated to Senior Entomologist (MPKV Rahuri / KVK) for second-line chemistry!` 
-          : `🔴 उपचार निकाल गंभीर सूचना!\n• ७ दिवसांत तीव्रता ${day0Severity}% वरून ${day7Severity}% वाढली.\n• प्रकरण #${caseItem.case_id} वरिष्ठ कीटकशास्त्रज्ञांकडे (MPKV राहुरी / KVK) द्वितीय-सूत्र रसायनासाठी स्वयं वर्ग केले!`);
+          ? `🔴 TREATMENT OUTCOME ALERT TRIGGERED!\n• Severity increased from ${fuData.day0Severity}% to ${fuData.day7Severity}% after 7 days.\n• Case #${caseItem.case_id} (${caseItem.farmer_profile?.crop_name}) has been automatically escalated to Senior Entomologist (MPKV Rahuri / KVK) for second-line chemistry!` 
+          : `🔴 उपचार निकाल गंभीर सूचना!\n• ७ दिवसांत तीव्रता ${fuData.day0Severity}% वरून ${fuData.day7Severity}% वाढली.\n• प्रकरण #${caseItem.case_id} (${caseItem.farmer_profile?.crop_name}) वरिष्ठ कीटकशास्त्रज्ञांकडे (MPKV राहुरी / KVK) द्वितीय-सूत्र रसायनासाठी स्वयं वर्ग केले!`);
       } else {
         alert(isEn 
-          ? `🟢 RECOVERY VERIFIED!\n• Severity reduced from ${day0Severity}% to ${day7Severity}% (${day0Severity - day7Severity}% healing).\n• Case #${caseItem.case_id} is marked VERIFIED_RESOLVED and archived.` 
-          : `🟢 बरे होणे सत्यापित!\n• तीव्रता ${day0Severity}% वरून ${day7Severity}% कमी झाली (${day0Severity - day7Severity}% बरे).\n• प्रकरण #${caseItem.case_id} VERIFIED_RESOLVED असे चिन्हांकित करून संग्रहित केले.`);
+          ? `🟢 RECOVERY VERIFIED!\n• Severity reduced from ${fuData.day0Severity}% to ${fuData.day7Severity}% (${fuData.day0Severity - fuData.day7Severity}% healing).\n• Case #${caseItem.case_id} (${caseItem.farmer_profile?.crop_name}) is marked VERIFIED_RESOLVED and archived.` 
+          : `🟢 बरे होणे सत्यापित!\n• तीव्रता ${fuData.day0Severity}% वरून ${fuData.day7Severity}% कमी झाली (${fuData.day0Severity - fuData.day7Severity}% बरे).\n• प्रकरण #${caseItem.case_id} (${caseItem.farmer_profile?.crop_name}) VERIFIED_RESOLVED असे चिन्हांकित करून संग्रहित केले.`);
       }
       setEvaluatingCase(null);
     } catch (err) {
@@ -1724,7 +1792,11 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                 if (a.follow_up_evaluated === b.follow_up_evaluated) return 0;
                 return a.follow_up_evaluated ? 1 : -1;
               })
-              .map(c => (
+              .map(c => {
+                const fuData = getCaseFollowUp(c);
+                const isDet = fuData.day7Severity > fuData.day0Severity;
+
+                return (
               <div key={c.case_id} className={`p-5 rounded-2xl border space-y-3 shadow-xs transition ${
                 c.follow_up_evaluated ? 'border-slate-200 bg-slate-100/70 opacity-90' : 'border-slate-300 bg-slate-50'
               }`}>
@@ -1749,7 +1821,7 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
 
                 <div className="bg-white p-3 rounded-xl border border-slate-200 space-y-1 text-slate-700">
                   <p><strong>{isEn ? 'Farmer:' : 'शेतकरी:'}</strong> {c.farmer_profile?.farmer_name} (+91 98223 45678)</p>
-                  <p><strong>{isEn ? 'Treatment Recorded:' : 'उपचार नोंदले:'}</strong> Emamectin Benzoate 5% SG ({isEn ? 'YES' : 'होय'})</p>
+                  <p><strong>{isEn ? 'Treatment Recorded:' : 'उपचार नोंदले:'}</strong> {fuData.treatmentName} ({isEn ? 'YES' : 'होय'})</p>
                   <p><strong>{isEn ? 'Last Inspection:' : 'शेवटची तपासणी:'}</strong> {isEn ? '7 days ago' : '७ दिवसांपूर्वी'}</p>
                 </div>
 
@@ -1765,11 +1837,11 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                     <div className="p-2 bg-slate-50 rounded-lg border border-slate-200 space-y-1.5">
                       <div className="flex justify-between items-center text-[10px] font-bold">
                         <span className="text-slate-600">{isEn ? 'Day 0 (Initial)' : 'दिवस ० (प्रारंभिक)'}</span>
-                        <span className="text-rose-700 font-mono">{day0Severity}% {isEn ? 'Lesions' : 'फोड'}</span>
+                        <span className="text-rose-700 font-mono">{fuData.day0Severity}% {isEn ? 'Lesions' : 'फोड'}</span>
                       </div>
                       <div className="aspect-video bg-slate-900 rounded overflow-hidden relative group">
                         <img 
-                          src={followUpPhotoDay0 || 'https://images.unsplash.com/photo-1598880940371-c756e015fea1?auto=format&fit=crop&w=400&q=80'} 
+                          src={fuData.day0Photo} 
                           alt={isEn ? 'Day 0' : 'दिवस ०'} 
                           className="w-full h-full object-cover"
                         />
@@ -1782,23 +1854,23 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                             className="hidden" 
                             onChange={(e) => {
                               const file = e.target.files[0];
-                              if (file) setFollowUpPhotoDay0(URL.createObjectURL(file));
+                              if (file) updateCaseFollowUp(c.case_id, { day0Photo: URL.createObjectURL(file) });
                             }}
                           />
                         </label>
                       </div>
-                      <span className="text-[9px] text-slate-500 block">{isEn ? 'Severe necrotic spots' : 'गंभीर मृत ठिपके'}</span>
+                      <span className="text-[9px] text-slate-500 block truncate" title={fuData.day0Desc}>{fuData.day0Desc}</span>
                     </div>
 
                     {/* Day 7 Re-scan Image */}
                     <div className="p-2 bg-emerald-50/50 rounded-lg border border-emerald-200 space-y-1.5">
                       <div className="flex justify-between items-center text-[10px] font-bold">
                         <span className="text-emerald-900">{isEn ? 'Day 7 (Re-scan)' : 'दिवस ७ (पुन्हा स्कॅन)'}</span>
-                        <span className={`font-mono ${isDeteriorating ? 'text-rose-700' : 'text-emerald-700'}`}>{day7Severity}% {isEn ? 'Lesions' : 'फोड'}</span>
+                        <span className={`font-mono ${isDet ? 'text-rose-700' : 'text-emerald-700'}`}>{fuData.day7Severity}% {isEn ? 'Lesions' : 'फोड'}</span>
                       </div>
                       <div className="aspect-video bg-slate-900 rounded overflow-hidden relative group border border-emerald-300">
                         <img 
-                          src={followUpPhotoDay7 || 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=400&q=80'} 
+                          src={fuData.day7Photo} 
                           alt={isEn ? 'Day 7' : 'दिवस ७'} 
                           className="w-full h-full object-cover"
                         />
@@ -1811,13 +1883,23 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                             className="hidden" 
                             onChange={(e) => {
                               const file = e.target.files[0];
-                              if (file) setFollowUpPhotoDay7(URL.createObjectURL(file));
+                              if (file) {
+                                const url = URL.createObjectURL(file);
+                                updateCaseFollowUp(c.case_id, { day7Photo: url, isAnalyzing: true });
+                                setTimeout(() => {
+                                  const calculatedDay7 = Math.max(4, Math.floor(fuData.day0Severity * 0.4));
+                                  updateCaseFollowUp(c.case_id, { day7Severity: calculatedDay7, isAnalyzing: false });
+                                  alert(isEn 
+                                    ? `📸 AI Re-Scan Vision Completed for #${c.case_id} (${c.farmer_profile?.crop_name})!\n• Lesion area calculated automatically: ${calculatedDay7}%\n• Recovery improvement: ${fuData.day0Severity - calculatedDay7}% healing confirmed.` 
+                                    : `📸 AI पुन्हा-स्कॅन दृष्टी पूर्ण (${c.farmer_profile?.crop_name})!\n• फोड क्षेत्र स्वयं गणले: ${calculatedDay7}%\n• सुधारणा: ${fuData.day0Severity - calculatedDay7}% बरे झाले पुष्टी.`);
+                                }, 1200);
+                              }
                             }}
                           />
                         </label>
                       </div>
-                      <label className="text-[9px] text-emerald-800 font-bold hover:underline cursor-pointer block">
-                        {isAnalyzingDay7Photo ? (isEn ? '⏳ AI Calculating Lesion %...' : '⏳ AI फोड % मोजत आहे...') : (followUpPhotoDay7 ? (isEn ? '✓ New Photo Attached (AI Calculated)' : '✓ नवीन फोटो जोडला (AI गणना)') : (isEn ? '📷 Take Follow-Up Photo' : '📷 पाठपुरावा फोटो घ्या'))}
+                      <label className="text-[9px] text-emerald-800 font-bold hover:underline cursor-pointer block truncate" title={fuData.day7Desc}>
+                        {fuData.isAnalyzing ? (isEn ? '⏳ AI Calculating...' : '⏳ AI मोजत आहे...') : (fuData.day7Photo ? (isEn ? '✓ Photo Attached' : '✓ फोटो जोडला') : (isEn ? '📷 Take Photo' : '📷 फोटो घ्या'))}
                         <input 
                           type="file" 
                           accept="image/*" 
@@ -1826,14 +1908,14 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                           onChange={(e) => {
                             const file = e.target.files[0];
                             if (file) {
-                              setFollowUpPhotoDay7(URL.createObjectURL(file));
-                              setIsAnalyzingDay7Photo(true);
+                              const url = URL.createObjectURL(file);
+                              updateCaseFollowUp(c.case_id, { day7Photo: url, isAnalyzing: true });
                               setTimeout(() => {
-                                // AI Automated Pixel / Lesion Calculation
-                                const calculatedDay7 = Math.max(5, Math.floor(day0Severity * 0.45)); // e.g. 25% -> 11%
-                                setDay7Severity(calculatedDay7);
-                                setIsAnalyzingDay7Photo(false);
-                                alert(isEn ? `📸 AI Re-Scan Vision Completed!\n• Lesion area calculated automatically: ${calculatedDay7}%\n• Recovery improvement: ${day0Severity - calculatedDay7}% healing confirmed.` : `📸 AI पुन्हा-स्कॅन दृष्टी पूर्ण!\n• फोड क्षेत्र स्वयं गणले: ${calculatedDay7}%\n• सुधारणा: ${day0Severity - calculatedDay7}% बरे झाले पुष्टी.`);
+                                const calculatedDay7 = Math.max(4, Math.floor(fuData.day0Severity * 0.4));
+                                updateCaseFollowUp(c.case_id, { day7Severity: calculatedDay7, isAnalyzing: false });
+                                alert(isEn 
+                                  ? `📸 AI Re-Scan Vision Completed for #${c.case_id} (${c.farmer_profile?.crop_name})!\n• Lesion area calculated automatically: ${calculatedDay7}%\n• Recovery improvement: ${fuData.day0Severity - calculatedDay7}% healing confirmed.` 
+                                  : `📸 AI पुन्हा-स्कॅन दृष्टी पूर्ण (${c.farmer_profile?.crop_name})!\n• फोड क्षेत्र स्वयं गणले: ${calculatedDay7}%\n• सुधारणा: ${fuData.day0Severity - calculatedDay7}% बरे झाले पुष्टी.`);
                               }, 1200);
                             }
                           }}
@@ -1851,32 +1933,32 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                     </span>
                     <button
                       type="button"
-                      onClick={() => setIsPrescribingSecondLine(!isPrescribingSecondLine)}
+                      onClick={() => updateCaseFollowUp(c.case_id, { isPrescribingSecondLine: !fuData.isPrescribingSecondLine })}
                       className="px-2.5 py-1 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-[10px] flex items-center gap-1 shadow-xs"
                     >
                       <Edit3 className="w-3 h-3" />
-                      <span>{isPrescribingSecondLine ? (isEn ? 'Hide Rx Editor' : 'Rx सुधारक लपवा') : (isEn ? '💊 Change Medicine / Second-Line Rx' : '💊 औषध बदला / द्वितीय-सूत्र Rx')}</span>
+                      <span>{fuData.isPrescribingSecondLine ? (isEn ? 'Hide Rx Editor' : 'Rx सुधारक लपवा') : (isEn ? '💊 Change Medicine / Second-Line Rx' : '💊 औषध बदला / द्वितीय-सूत्र Rx')}</span>
                     </button>
                   </div>
                   
                   <div className="grid grid-cols-2 gap-2 text-center font-mono">
                     <div className="bg-white p-2 rounded border border-slate-200">
                       <span className="text-[10px] text-slate-500 block">{isEn ? 'Day 0 Baseline:' : 'दिवस ० प्रारंभिक:'}</span>
-                      <strong className="text-slate-900 text-sm">{day0Severity}%</strong>
+                      <strong className="text-slate-900 text-sm">{fuData.day0Severity}%</strong>
                     </div>
                     <div className="bg-white p-2 rounded border border-slate-200">
                       <span className="text-[10px] text-slate-500 block">{isEn ? 'Day 7 Re-scan (Auto/Manual):' : 'दिवस ७ पुन्हा स्कॅन (स्वयं/हस्त):'}</span>
                       <input 
                         type="number" 
-                        value={day7Severity} 
-                        onChange={(e) => setDay7Severity(parseInt(e.target.value) || 0)}
+                        value={fuData.day7Severity} 
+                        onChange={(e) => updateCaseFollowUp(c.case_id, { day7Severity: parseInt(e.target.value) || 0 })}
                         className="w-16 border rounded p-1 font-bold text-center text-xs"
                       />
                     </div>
                   </div>
 
                   {/* SECOND-LINE MEDICINE REVISION PANEL (If officer needs to switch chemical) */}
-                  {isPrescribingSecondLine && (
+                  {fuData.isPrescribingSecondLine && (
                     <div className="p-3 bg-amber-50 rounded-xl border border-amber-300 space-y-2 text-xs">
                       <span className="font-bold text-amber-950 block text-[11px]">
                         🔄 {isEn ? 'Change Medicine / Prescribe Second-Line Active Ingredient:' : 'औषध बदला / द्वितीय-सूत्र सक्रिय घटक द्या:'}
@@ -1886,8 +1968,8 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                           <span className="text-[10px] text-slate-600 font-bold block">{isEn ? 'Second-Line CIBRC Chemical & Dose:' : 'द्वितीय-सूत्र CIBRC रसायन व डोस:'}</span>
                           <input 
                             type="text" 
-                            value={secondLineMolecule}
-                            onChange={(e) => setSecondLineMolecule(e.target.value)}
+                            value={fuData.secondLineMolecule}
+                            onChange={(e) => updateCaseFollowUp(c.case_id, { secondLineMolecule: e.target.value })}
                             className="w-full border border-amber-300 rounded p-1.5 bg-white font-bold text-slate-800 text-xs"
                           />
                         </div>
@@ -1895,16 +1977,16 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                           <span className="text-[10px] text-slate-600 font-bold block">{isEn ? 'Clinical Rationale for Change:' : 'बदलण्याचे वैद्यकीय कारण:'}</span>
                           <input 
                             type="text" 
-                            value={secondLineNotes}
-                            onChange={(e) => setSecondLineNotes(e.target.value)}
+                            value={fuData.secondLineNotes}
+                            onChange={(e) => updateCaseFollowUp(c.case_id, { secondLineNotes: e.target.value })}
                             className="w-full border border-amber-300 rounded p-1.5 bg-white text-slate-800 text-xs"
                           />
                         </div>
                         <button
                           type="button"
                           onClick={() => {
-                            alert(isEn ? `💊 Revised CIBRC Prescription Dispatched to Farmer ${c.farmer_profile?.farmer_name}!\n• New Molecule: ${secondLineMolecule}\n• Rationale: ${secondLineNotes}\n• Next Follow-up: 7 Days.` : `💊 शेतकरी ${c.farmer_profile?.farmer_name} यांना सुधारित CIBRC औषधोपचार पत्रक पाठवले!\n• नवीन घटक: ${secondLineMolecule}\n• कारण: ${secondLineNotes}\n• पुढील पाठपुरावा: ७ दिवस.`);
-                            setIsPrescribingSecondLine(false);
+                            alert(isEn ? `💊 Revised CIBRC Prescription Dispatched to Farmer ${c.farmer_profile?.farmer_name}!\n• New Molecule: ${fuData.secondLineMolecule}\n• Rationale: ${fuData.secondLineNotes}\n• Next Follow-up: 7 Days.` : `💊 शेतकरी ${c.farmer_profile?.farmer_name} यांना सुधारित CIBRC औषधोपचार पत्रक पाठवले!\n• नवीन घटक: ${fuData.secondLineMolecule}\n• कारण: ${fuData.secondLineNotes}\n• पुढील पाठपुरावा: ७ दिवस.`);
+                            updateCaseFollowUp(c.case_id, { isPrescribingSecondLine: false });
                           }}
                           className="w-full py-1.5 bg-amber-700 hover:bg-amber-800 text-white rounded-lg font-bold text-xs transition"
                         >
@@ -1916,17 +1998,17 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
 
                   {/* Outcome Status Banner */}
                   <div className={`p-2.5 rounded-xl border text-[11px] font-bold ${
-                    isDeteriorating 
+                    isDet 
                       ? 'bg-rose-100 border-rose-300 text-rose-900' 
                       : 'bg-emerald-100 border-emerald-300 text-emerald-900'
                   }`}>
-                    {isDeteriorating ? (
+                    {isDet ? (
                       <div>
-                        🔴 <strong>{isEn ? 'TREATMENT OUTCOME ALERT:' : 'उपचार निकाल गंभीर सूचना:'}</strong> {isEn ? 'Disease severity increased from' : 'रोगाची तीव्रता वाढली'} {day0Severity}% {isEn ? 'to' : 'वरून'} {day7Severity}%. {isEn ? 'Recommended: Rotate chemical chemistry or auto-escalate to Expert.' : 'शिफारस: रसायन बदला किंवा तज्ज्ञाकडे स्वयं वर्ग करा.'}
+                        🔴 <strong>{isEn ? 'TREATMENT OUTCOME ALERT:' : 'उपचार निकाल गंभीर सूचना:'}</strong> {isEn ? 'Disease severity increased from' : 'रोगाची तीव्रता वाढली'} {fuData.day0Severity}% {isEn ? 'to' : 'वरून'} {fuData.day7Severity}%. {isEn ? 'Recommended: Rotate chemical chemistry or auto-escalate to Expert.' : 'शिफारस: रसायन बदला किंवा तज्ज्ञाकडे स्वयं वर्ग करा.'}
                       </div>
                     ) : (
                       <div>
-                        🟢 <strong>{isEn ? 'HEALING VERIFIED:' : 'बरे होणे सत्यापित:'}</strong> {isEn ? 'Severity reduced by' : 'तीव्रता कमी झाली'} {day0Severity - day7Severity}%. {isEn ? 'Treatment is working effectively. New green foliage flushing.' : 'उपचार प्रभावी आहे. नवीन हिरवी पाने येत आहेत.'}
+                        🟢 <strong>{isEn ? 'HEALING VERIFIED:' : 'बरे होणे सत्यापित:'}</strong> {isEn ? 'Severity reduced by' : 'तीव्रता कमी झाली'} {fuData.day0Severity - fuData.day7Severity}%. {isEn ? 'Treatment is working effectively. New green foliage flushing.' : 'उपचार प्रभावी आहे. नवीन हिरवी पाने येत आहेत.'}
                       </div>
                     )}
                   </div>
@@ -1965,17 +2047,18 @@ export const KrishiSevakPortal = ({ currentLang = 'en' }) => {
                       <button
                         onClick={() => handleEvaluateFollowUp(c)}
                         className={`px-4 py-1.5 rounded-lg font-bold text-xs text-white shadow-xs ${
-                          isDeteriorating ? 'bg-rose-700 hover:bg-rose-800' : 'bg-emerald-700 hover:bg-emerald-800'
+                          isDet ? 'bg-rose-700 hover:bg-rose-800' : 'bg-emerald-700 hover:bg-emerald-800'
                         }`}
                       >
-                        {isDeteriorating ? (isEn ? '[TRIGGER OUTCOME ALERT & ESCALATE]' : '[निकाल सूचना व तज्ज्ञांकडे वर्ग करा]') : (isEn ? '[CONFIRM RECOVERY & RESOLVE]' : '[बरे होणे पुष्टी करून निवारण करा]')}
+                        {isDet ? (isEn ? '[TRIGGER OUTCOME ALERT & ESCALATE]' : '[निकाल सूचना व तज्ज्ञांकडे वर्ग करा]') : (isEn ? '[CONFIRM RECOVERY & RESOLVE]' : '[बरे होणे पुष्टी करून निवारण करा]')}
                       </button>
                     </div>
                   )}
                 </div>
 
               </div>
-            ))}
+                );
+              })}
           </div>
         </section>
       )}
